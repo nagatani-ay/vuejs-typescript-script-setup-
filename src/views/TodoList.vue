@@ -105,14 +105,13 @@ const listSort = computed(() => {
   <div>ToDo</div>
   <div class="menu">
     <todo-menu
-      :selectFilterType="filterType"
       @create="$emit('create', $event)"
-      @filter="$emit(changeFilter())"
+      @update:filter="filterType = $event"
     ></todo-menu>
   </div>
   <ul>
     <todo-item
-      v-for="todo in todos"
+      v-for="todo in listSort"
       :key="todo.code"
       :todo="todo"
       @edit="$emit('edit', $event)"

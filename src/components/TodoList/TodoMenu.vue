@@ -8,13 +8,16 @@ import { Todo } from '../../types';
 import RadioButton from '../controls/RadioButton.vue';
 
 const filterTypes = ref(['全', '済', '未']);
+const selectFilterType = ref('全');
 
 const newText = ref('');
 const newDeadline = ref('');
 const isOpen = ref(false);
-const props = defineProps<{ selectFilterType: string }>();
-const emit =
-  defineEmits<{ (e: 'create', data: Todo); (e: 'filter', data: string) }>();
+const props = defineProps<{}>();
+const emit = defineEmits<{
+  (e: 'create', data: Todo);
+  (e: 'update:filter', selectFilterType: string);
+}>();
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
@@ -47,12 +50,7 @@ const createNewData = () => {
       group="FilterMenuButton"
       v-model="selectFilterType"
     ></radio-button>
-    <custom-button
-      @click="
-        $emit('update:filter', selectFilterType);
-        toggleFilterMenu();
-      "
-    >
+    <custom-button @click="$emit('update:filter', selectFilterType)">
       実行
     </custom-button>
   </div>
