@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import TodoItem from '../components/TodoList/TodoItem.vue';
 import TodoMenu from '../components/TodoList/TodoMenu.vue';
-defineProps<{ todos: Todos[] }>();
-const emit = defineEmits<{ (e: 'create', data: Todo) }>();
+const props = defineProps<{ todos: Todo[] }>();
+const emit =
+  defineEmits<{
+    (e: 'create', data: Todo);
+    (e: 'edit', data: Todo);
+    (e: 'delete', data: string);
+  }>();
 </script>
 
 <template>
@@ -11,7 +16,12 @@ const emit = defineEmits<{ (e: 'create', data: Todo) }>();
     <todo-menu @create="$emit('create', $event)"></todo-menu>
   </div>
   <ul>
-    <todo-item v-for="todo in todos" :todo="todo"></todo-item>
+    <todo-item
+      v-for="todo in todos"
+      :todo="todo"
+      @edit="$emit('edit', $event)"
+      @delete="$emit('delete', $event)"
+    ></todo-item>
   </ul>
 </template>
 

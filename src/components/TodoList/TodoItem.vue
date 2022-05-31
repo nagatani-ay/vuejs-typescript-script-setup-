@@ -4,35 +4,72 @@ import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
 import CheckBox from '../controls/CheckBox.vue';
 import { ref } from 'vue';
-import { toStringDeadline } from '../../Function/utils';
+import {
+  toStringDeadline,
+  toObjectDeadline,
+  getTime,
+} from '../../Function/utils';
+import { Todo } from '../../types';
 
-defineProps<{ todo: Todos }>();
+const props = defineProps<{ todo: Todo }>();
+const emit =
+  defineEmits<{ (e: 'edit', data: Todo); (e: 'delete', data: string) }>();
 
 const isOpen = ref(false);
 const tempText = ref('');
 const tempDeadline = ref('');
 
-function toggleMenu() {
+const toggleMenu = () => {
   isOpen.value = !isOpen.value;
-}
+};
+
+const editData = () => {
+  const newData = {
+    code: props.todo.code,
+    text: tempText.value,
+    status: props.todo.status,
+    time: getTime(),
+    deadline: toObjectDeadline(tempDeadline.value),
+  };
+  emit('edit', newData);
+  tempText.value = '';
+  tempDeadline.value = '';
+  toggleMenu();
+};
+const deleteData = () => {
+  emit('delete', props.todo.code);
+  toggleMenu();
+};
 </script>
 
 <template>
   <li>
     {{ tempText }}/{{ tempDeadline }}
     <custom-button @click="toggleMenu()">edit</custom-button>
+    <!-- 編集メニュー -->
     <div class="editMenu" v-if="isOpen">
+      <custom-button @click="deleteData()">delete</custom-button>
       <text-input v-model="tempText" :placeholder="todo.text"></text-input>
       <date-input
         v-model="tempDeadline"
         :value="toStringDeadline(todo.deadline)"
       ></date-input>
-      <custom-button @click="editData()">create</custom-button>
+      <custom-button @click="editData()">完了</custom-button>
     </div>
+    <!-- 表示アイテム -->
     <check-box></check-box>
-    <span>{{ todo.text }}</span>
-    <span>{{ todo.time }}</span>
+    <span class="text">{{ todo.text }}</span>
+    <span class="time">{{ todo.time }}</span>
   </li>
 </template>
 
-<style></style>
+<style>
+.time {
+  font-size: 0.8em;
+  color: transparent;
+}
+
+.time:hover {
+  color: grey;
+}
+</style>

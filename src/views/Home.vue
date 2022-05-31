@@ -1,6 +1,11 @@
 <script setup lang="ts">
-defineProps<{ todos: Todos[] }>();
-const emit = defineEmits<{ (e: 'create', data: Todo) }>();
+const props = defineProps<{ todos: Todo[] }>();
+const emit =
+  defineEmits<{
+    (e: 'create', data: Todo);
+    (e: 'edit', data: Todo);
+    (e: 'delete', data: string);
+  }>();
 </script>
 
 <template>
@@ -17,6 +22,8 @@ const emit = defineEmits<{ (e: 'create', data: Todo) }>();
         <router-view
           :todos="todos"
           @create="$emit('create', $event)"
+          @edit="$emit('edit', $event)"
+          @delete="$emit('delete', $event)"
         ></router-view>
       </div>
     </div>

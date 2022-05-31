@@ -8,11 +8,13 @@ import { Todo } from '../../types';
 
 const newText = ref('');
 const newDeadline = ref('');
+const isOpen =ref(false);
 
-const props = defineProps<{ todos: Todo }>();
 const emit = defineEmits<{ (e: 'create', data: Todo) }>();
-
-function createNewData() {
+const toggleMenu = () => {
+  isOpen.value = !isOpen.value;
+};
+const createNewData=() => {
   const newData = {
     code: generateID(),
     text: newText.value,
@@ -23,13 +25,14 @@ function createNewData() {
   emit('create', newData);
   newText.value = '';
   newDeadline.value = '';
+  toggleMenu()
 }
 </script>
 
 <template>
   <div>
-    <custom-button></custom-button>
-    <div>
+    <custom-button @click="toggleMenu()">New</custom-button>
+    <div v-if="isOpen">
       <text-input v-model="newText"></text-input>
       <date-input v-model="newDeadline"></date-input>
       <custom-button @click="createNewData()">create</custom-button>
