@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import User from './views/User.vue';
-import UserTodoList from './views/UserTodoList.vue';
+import Home from './views/Home.vue';
+import TodoList from './views/TodoList.vue';
 </script>
 
 <template>
-  <router-link to="todolist"> todolist</router-link>
-  <route-view></route-view>
-  test1
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style></style>
