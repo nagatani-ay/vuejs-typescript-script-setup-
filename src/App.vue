@@ -6,20 +6,13 @@ import { ref } from 'vue';
 
 const todos = ref<Todo[]>([]);
 
-function addTodos() {
-  todos.value.push({
-    code: 'string',
-    text: 'string',
-    status: false,
-    time: 'string',
-    deadline: { year: 2022, month: 5, day: 1 },
-  });
+function onCreate(data) {
+  todos.value.push(data);
 }
 </script>
 
 <template>
-  <router-view :todos="todos"></router-view>
-  <button @click="addTodos()">test</button>
+  <router-view :todos="todos" @create="onCreate"></router-view>
 </template>
 
 <style></style>

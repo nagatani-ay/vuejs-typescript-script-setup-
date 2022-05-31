@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{ todos: Todos[] }>();
+const emit = defineEmits<{ (e: 'create', data: Todo) }>();
 </script>
 
 <template>
@@ -13,7 +14,10 @@ defineProps<{ todos: Todos[] }>();
         </ul>
       </div>
       <div class="main">
-        <router-view :todos="todos"></router-view>
+        <router-view
+          :todos="todos"
+          @create="$emit('create', $event)"
+        ></router-view>
       </div>
     </div>
   </div>
@@ -29,11 +33,12 @@ defineProps<{ todos: Todos[] }>();
 }
 .header {
   border-bottom: solid 1px black;
+  background-color: #fab964;
 }
 .sidemenu {
-  background-color: #e0ffff;
+  background-color: #facf96;
 }
 .main {
-  background-color: #e0ffff;
+  background-color: #fae4c8;
 }
 </style>

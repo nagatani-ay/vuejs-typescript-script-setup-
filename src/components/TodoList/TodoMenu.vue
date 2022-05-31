@@ -2,15 +2,37 @@
 import CustomButton from '../controls/Button.vue';
 import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
+import { generateID, getTime, toObjectDeadline } from '../../Function/utils';
+import { ref } from 'vue';
+import { Todo } from '../../types';
+
+const newText = ref('');
+const newDeadline = ref('');
+
+const props = defineProps<{ todos: Todo }>();
+const emit = defineEmits<{ (e: 'create', data: Todo) }>();
+
+function createNewData() {
+  const newData = {
+    code: generateID(),
+    text: newText.value,
+    status: false,
+    time: getTime(),
+    deadline: toObjectDeadline(newDeadline.value),
+  };
+  emit('create', newData);
+  newText.value = '';
+  newDeadline.value = '';
+}
 </script>
 
 <template>
   <div>
     <custom-button></custom-button>
     <div>
-      <text-input></text-input>
-      <date-input></date-input>
-      <custom-button></custom-button>
+      <text-input v-model="newText"></text-input>
+      <date-input v-model="newDeadline"></date-input>
+      <custom-button @click="createNewData()">create</custom-button>
     </div>
   </div>
 </template>
