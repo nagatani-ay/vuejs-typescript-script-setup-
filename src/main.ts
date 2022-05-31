@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import User from './views/User.vue';
+import UserTodoList from './views/UserTodoList.vue';
 import VueRouter from 'vue-router';
 
 const router = VueRouter.createRouter({
@@ -13,4 +15,4 @@ const router = VueRouter.createRouter({
   ],
 });
 
-createApp(App).mount('#app');
+createApp(App).use(router).mount('#app');
