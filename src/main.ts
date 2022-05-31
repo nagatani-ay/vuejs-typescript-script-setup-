@@ -1,16 +1,15 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import User from './views/User.vue';
-import UserTodoList from './views/UserTodoList.vue';
-import VueRouter from 'vue-router';
-
-const router = VueRouter.createRouter({
-  history: VueRouter.createWebHashHistory(),
+import Home from './views/Home.vue';
+import TodoList from './views/TodoList.vue';
+import { createRouter, createWebHashHistory } from 'vue-router';
+const router = createRouter({
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      component: User,
-      children: [{ path: 'todolist', component: UserTodoList }],
+      component: Home,
+      children: [{ path: 'todolist', component: TodoList }],
     },
   ],
 });

@@ -2,6 +2,7 @@
 
 <template>
   <div>test</div>
+  test3
 </template>
 
 <style></style>
