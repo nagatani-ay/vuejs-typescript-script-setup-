@@ -7,18 +7,18 @@ import { ref } from 'vue';
 import { Todo } from '../../types';
 import RadioButton from '../controls/RadioButton.vue';
 
-const filterTypes =ref(["全","済","未"])
-
+const filterTypes = ref(['全', '済', '未']);
 
 const newText = ref('');
 const newDeadline = ref('');
-const isOpen =ref(false);
-const props = defineProps<{filterType:string}>();
-const emit = defineEmits<{ (e: 'create', data: Todo);(e: 'filter', data: string) }>();
+const isOpen = ref(false);
+const props = defineProps<{ selectFilterType: string }>();
+const emit =
+  defineEmits<{ (e: 'create', data: Todo); (e: 'filter', data: string) }>();
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
-const createNewData=() => {
+const createNewData = () => {
   const newData = {
     code: generateID(),
     text: newText.value,
@@ -29,8 +29,8 @@ const createNewData=() => {
   emit('create', newData);
   newText.value = '';
   newDeadline.value = '';
-  toggleMenu()
-}
+  toggleMenu();
+};
 </script>
 
 <template>
@@ -41,19 +41,20 @@ const createNewData=() => {
       <date-input v-model="newDeadline"></date-input>
       <custom-button @click="createNewData()">create</custom-button>
     </div>
-      <radio-button
-        v-for="filterType in filterTypeList"
-        :filter="filterType"
-        group="FilterMenuButton"
-        v-model="selectFilter"
-      ></radio-button>
-      <custom-button
-        @click="
-          $emit('update:filter', selectFilter);
-          toggleFilterMenu();
-        ">
-        実行
-      </custom-button>
+    <radio-button
+      v-for="filterType in filterTypes"
+      :filter="filterType"
+      group="FilterMenuButton"
+      v-model="selectFilterType"
+    ></radio-button>
+    <custom-button
+      @click="
+        $emit('update:filter', selectFilterType);
+        toggleFilterMenu();
+      "
+    >
+      実行
+    </custom-button>
   </div>
 </template>
 

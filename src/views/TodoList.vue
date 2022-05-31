@@ -105,7 +105,7 @@ const listSort = computed(() => {
   <div>ToDo</div>
   <div class="menu">
     <todo-menu
-      :filterType="filterType"
+      :selectFilterType="filterType"
       @create="$emit('create', $event)"
       @filter="$emit(changeFilter())"
     ></todo-menu>
