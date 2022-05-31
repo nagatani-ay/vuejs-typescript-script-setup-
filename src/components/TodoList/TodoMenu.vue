@@ -5,12 +5,16 @@ import DateInput from '../controls/DateInput.vue';
 import { generateID, getTime, toObjectDeadline } from '../../Function/utils';
 import { ref } from 'vue';
 import { Todo } from '../../types';
+import RadioButton from '../controls/RadioButton.vue';
+
+const filterTypes =ref(["全","済","未"])
+
 
 const newText = ref('');
 const newDeadline = ref('');
 const isOpen =ref(false);
-
-const emit = defineEmits<{ (e: 'create', data: Todo) }>();
+const props = defineProps<{filterType:string}>();
+const emit = defineEmits<{ (e: 'create', data: Todo);(e: 'filter', data: string) }>();
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
@@ -37,6 +41,19 @@ const createNewData=() => {
       <date-input v-model="newDeadline"></date-input>
       <custom-button @click="createNewData()">create</custom-button>
     </div>
+      <radio-button
+        v-for="filterType in filterTypeList"
+        :filter="filterType"
+        group="FilterMenuButton"
+        v-model="selectFilter"
+      ></radio-button>
+      <custom-button
+        @click="
+          $emit('update:filter', selectFilter);
+          toggleFilterMenu();
+        ">
+        実行
+      </custom-button>
   </div>
 </template>
 
