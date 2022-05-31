@@ -1,11 +1,10 @@
 <script setup lang="ts">
 const props = defineProps<{ todos: Todo[] }>();
-const emit =
-  defineEmits<{
-    (e: 'create', data: Todo);
-    (e: 'edit', data: Todo);
-    (e: 'delete', data: string);
-  }>();
+const emit = defineEmits<{
+  (e: 'create', data: Todo);
+  (e: 'edit', data: Todo);
+  (e: 'delete', data: string);
+}>();
 </script>
 
 <template>
@@ -33,10 +32,13 @@ const emit =
 <style>
 .container {
   display: block;
+  margin: 0 auto;
   max-width: 1000px;
+  height: 100%;
 }
 .body {
   display: flex;
+  height: 100%;
 }
 .header {
   border-bottom: solid 1px black;
@@ -44,8 +46,11 @@ const emit =
 }
 .sidemenu {
   background-color: #facf96;
+  width: 10%;
 }
 .main {
   background-color: #fae4c8;
+  width: 100%;
+  height: 100%;
 }
 </style>

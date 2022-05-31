@@ -2,7 +2,7 @@
 import Home from './views/Home.vue';
 import TodoList from './views/TodoList.vue';
 import { Todo } from './types.ts';
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 const todos = ref<Todo[]>([]);
 
@@ -21,6 +21,22 @@ const onDelete = (data) => {
   const target = codes.indexOf(data);
   todos.value.splice(target, 1);
 };
+
+onMounted(() => {
+  if (localStorage.getItem('todolist') != null) {
+    todos.value = JSON.parse(localStorage.getItem('todolist'));
+  }
+});
+
+watch(
+  () => todos.value,
+  (list, prevList) => {
+    if (list != null) {
+      localStorage.setItem('todolist', JSON.stringify(list));
+    }
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -32,4 +48,18 @@ const onDelete = (data) => {
   ></router-view>
 </template>
 
-<style></style>
+<style>
+html,
+body,
+#app {
+  height: 100%;
+}
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+</style>

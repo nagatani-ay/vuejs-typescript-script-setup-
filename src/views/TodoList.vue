@@ -2,16 +2,15 @@
 import TodoItem from '../components/TodoList/TodoItem.vue';
 import TodoMenu from '../components/TodoList/TodoMenu.vue';
 const props = defineProps<{ todos: Todo[] }>();
-const emit =
-  defineEmits<{
-    (e: 'create', data: Todo);
-    (e: 'edit', data: Todo);
-    (e: 'delete', data: string);
-  }>();
+const emit = defineEmits<{
+  (e: 'create', data: Todo);
+  (e: 'edit', data: Todo);
+  (e: 'delete', data: string);
+}>();
 </script>
 
 <template>
-  <div>title</div>
+  <div>ToDo</div>
   <div class="menu">
     <todo-menu @create="$emit('create', $event)"></todo-menu>
   </div>

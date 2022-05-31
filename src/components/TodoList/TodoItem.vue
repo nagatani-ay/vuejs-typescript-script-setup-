@@ -12,8 +12,11 @@ import {
 import { Todo } from '../../types';
 
 const props = defineProps<{ todo: Todo }>();
-const emit =
-  defineEmits<{ (e: 'edit', data: Todo); (e: 'delete', data: string) }>();
+const emit = defineEmits<{
+  (e: 'edit', data: Todo);
+  (e: 'delete', data: string);
+  (e: 'check', data: boolean);
+}>();
 
 const isOpen = ref(false);
 const tempText = ref('');
@@ -44,7 +47,6 @@ const deleteData = () => {
 
 <template>
   <li>
-    {{ tempText }}/{{ tempDeadline }}
     <custom-button @click="toggleMenu()">edit</custom-button>
     <!-- 編集メニュー -->
     <div class="editMenu" v-if="isOpen">
@@ -57,7 +59,7 @@ const deleteData = () => {
       <custom-button @click="editData()">完了</custom-button>
     </div>
     <!-- 表示アイテム -->
-    <check-box></check-box>
+    <check-box @check="$emit('check')"></check-box>
     <span class="text">{{ todo.text }}</span>
     <span class="time">{{ todo.time }}</span>
   </li>
