@@ -1,8 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{ todos: Todos[] }>();
+</script>
 
 <template>
   <div class="container">
-    <div class="header"><h1>TodoList</h1></div>
+    <div class="header">TodoList</div>
     <div class="body">
       <div class="sidemenu">
         <ul>
@@ -11,7 +13,7 @@
         </ul>
       </div>
       <div class="main">
-        <router-view></router-view>
+        <router-view :todos="todos"></router-view>
       </div>
     </div>
   </div>
@@ -24,17 +26,14 @@
 }
 .body {
   display: flex;
-  width: 100%;
-  height: 100%;
 }
 .header {
-  background-color: red;
+  border-bottom: solid 1px black;
 }
 .sidemenu {
-  background-color: blue;
-  height: 100%;
+  background-color: #e0ffff;
 }
 .main {
-  background-color: yellow;
+  background-color: #e0ffff;
 }
 </style>
