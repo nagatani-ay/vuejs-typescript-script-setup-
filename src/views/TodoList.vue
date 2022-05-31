@@ -6,6 +6,7 @@ const emit = defineEmits<{
   (e: 'create', data: Todo);
   (e: 'edit', data: Todo);
   (e: 'delete', data: string);
+  (e: 'check', data: string);
 }>();
 </script>
 
@@ -20,6 +21,7 @@ const emit = defineEmits<{
       :todo="todo"
       @edit="$emit('edit', $event)"
       @delete="$emit('delete', $event)"
+      @check="$emit('check', $event)"
     ></todo-item>
   </ul>
 </template>

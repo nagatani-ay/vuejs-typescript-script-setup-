@@ -15,7 +15,7 @@ const props = defineProps<{ todo: Todo }>();
 const emit = defineEmits<{
   (e: 'edit', data: Todo);
   (e: 'delete', data: string);
-  (e: 'check', data: boolean);
+  (e: 'check', data: string);
 }>();
 
 const isOpen = ref(false);
@@ -52,16 +52,20 @@ const deleteData = () => {
     <div class="editMenu" v-if="isOpen">
       <custom-button @click="deleteData()">delete</custom-button>
       <text-input v-model="tempText" :placeholder="todo.text"></text-input>
-      <date-input
-        v-model="tempDeadline"
-        :value="toStringDeadline(todo.deadline)"
-      ></date-input>
+      <date-input v-model="tempDeadline"></date-input>
       <custom-button @click="editData()">完了</custom-button>
     </div>
     <!-- 表示アイテム -->
-    <check-box @check="$emit('check')"></check-box>
-    <span class="text">{{ todo.text }}</span>
-    <span class="time">{{ todo.time }}</span>
+    <check-box
+      :modelValue="todo.status"
+      @check="$emit('check', todo.code)"
+    ></check-box>
+    <span>
+      <span class="text">{{ todo.text }}</span>
+      <span class="time">{{ todo.time }}</span>
+    </span>
+
+    <span class="deadline">{{ toStringDeadline(todo.deadline) }}</span>
   </li>
 </template>
 

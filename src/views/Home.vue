@@ -4,6 +4,7 @@ const emit = defineEmits<{
   (e: 'create', data: Todo);
   (e: 'edit', data: Todo);
   (e: 'delete', data: string);
+  (e: 'check', data: string);
 }>();
 </script>
 
@@ -23,6 +24,7 @@ const emit = defineEmits<{
           @create="$emit('create', $event)"
           @edit="$emit('edit', $event)"
           @delete="$emit('delete', $event)"
+          @check="$emit('check', $event)"
         ></router-view>
       </div>
     </div>

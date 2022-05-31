@@ -3,6 +3,7 @@ import Home from './views/Home.vue';
 import TodoList from './views/TodoList.vue';
 import { Todo } from './types.ts';
 import { ref, onMounted, watch } from 'vue';
+import { getTime } from './Function/utils';
 
 const todos = ref<Todo[]>([]);
 
@@ -20,6 +21,16 @@ const onDelete = (data) => {
   const codes = todos.value.map((x: Todo) => x.code);
   const target = codes.indexOf(data);
   todos.value.splice(target, 1);
+};
+const onCheck = (data) => {
+  const codes = todos.value.map((x: Todo) => x.code);
+  const target = codes.indexOf(data);
+  todos.value[target].status = !todos.value[target].status;
+  if (todos.value[target].status) {
+    todos.value[target].time = '完了:' + getTime();
+  } else {
+    todos.value[target].time = getTime();
+  }
 };
 
 onMounted(() => {
@@ -45,6 +56,7 @@ watch(
     @create="onCreate"
     @edit="onEdit"
     @delete="onDelete"
+    @check="onCheck"
   ></router-view>
 </template>
 

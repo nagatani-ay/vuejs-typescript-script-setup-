@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ modelValue: string }>(), {
-  modelValue: '',
-});
+const props = defineProps<{ modelValue: string }>();
 const emit = defineEmits<{ (e: 'update:modelValue', text: string): string }>();
 </script>
 
