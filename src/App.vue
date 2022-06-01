@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import Home from './views/Home.vue';
 import TodoList from './views/TodoList.vue';
-import { Todo } from './types.ts';
+import { Todo } from './types';
 import { ref, onMounted, watch } from 'vue';
+import { useTodos } from './Function/useTodos';
 import { getTime } from './Function/utils';
 
 const todos = ref<Todo[]>([]);
@@ -54,7 +55,7 @@ watch(
   <button @click="todos = []">clear</button>
   <router-view
     :todos="todos"
-    @create="onCreate"
+    @create="useTodos().add()"
     @edit="onEdit"
     @delete="onDelete"
     @check="onCheck"
