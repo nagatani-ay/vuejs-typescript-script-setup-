@@ -11,17 +11,16 @@ const emit = defineEmits<{
 }>();
 
 const sortType = ref('Text');
-const orderType = ref('');
+const orderType = ref('decend');
 const filterType = ref('全');
 const changeFilter = (data) => {
   console.log(data);
 };
 
-const setSort = (data) => {
-  // sortType = data.selectSortType;
-  // orderType = data.selectOrder;
+const setSort = (type, order) => {
+  sortType.value = type;
+  orderType.value = order;
 };
-
 const listFilter = computed(() => {
   let filtered_list = [];
 
@@ -38,7 +37,7 @@ const listFilter = computed(() => {
 const listSort = computed(() => {
   let sorted_list = [];
   let order = 1;
-  if (orderType.value == 'ascend') {
+  if (orderType.value == 'decend') {
     order = -1;
   } else {
     order = 1;
@@ -112,7 +111,7 @@ const listSort = computed(() => {
     <todo-menu
       @create="$emit('create', $event)"
       @update:filter="filterType = $event"
-      @update:sort="setSort()"
+      @update:sort="setSort"
     ></todo-menu>
   </div>
   <ul>
