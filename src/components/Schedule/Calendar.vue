@@ -1,10 +1,17 @@
 <script setup lang="ts">
-const props = defineProps<{}>();
+import { Date, Calendar } from '../../types';
+const props = defineProps<{ calendarArray: Calendar }>();
 const emit = defineEmits<{}>();
 </script>
 
 <template>
   calendar
+  <div class="calendar__table">
+    <div v-for="calendar in calendarArray">
+      {{ calendar.date.day }}
+    </div>
+  </div>
+
   <!-- <div class="calendar__body">
     <div
       class="calendar__table"
@@ -53,4 +60,11 @@ const emit = defineEmits<{}>();
   </div> -->
 </template>
 
-<style></style>
+<style>
+.calendar__table {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-rows: minmax(150px, auto);
+}
+</style>

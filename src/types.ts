@@ -12,6 +12,11 @@ export type DeadLine = {
   day: number;
 };
 
+export type Calendar = {
+  date: { year: number; month: number; day: number };
+  dayofweek: number;
+};
+
 export enum SortType {
   Text,
   Status,
