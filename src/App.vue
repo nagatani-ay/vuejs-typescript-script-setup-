@@ -8,8 +8,17 @@ import { getTime } from './Function/utils';
 
 const todos = ref<Todo[]>([]);
 
+const testData =ref<Todo>({
+  code: "string",
+  text: "string",
+  status: false,
+  time: "string",
+  deadline: { year: 2022; month: 5; day: 0 }
+})
+
+const { add, remove } = useTodos();
 function onCreate(data: Todo) {
-  todos.value.push(data);
+  // todos.value.push(data);
 }
 
 function onEdit(data: Todo) {
@@ -53,6 +62,7 @@ watch(
 
 <template>
   <button @click="todos = []">clear</button>
+  <button @click="add(todos)">addtest</button>
   <router-view
     :todos="todos"
     @create="useTodos().add()"
