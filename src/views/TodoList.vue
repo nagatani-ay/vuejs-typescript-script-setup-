@@ -7,7 +7,7 @@ const props = defineProps<{ todos: Todo[] }>();
 const emit = defineEmits<{
   (e: 'create', data: Todo);
   (e: 'edit', data: Todo);
-  (e: 'delete', data: string);
+  (e: 'remove', data: string);
   (e: 'check', data: string);
 }>();
 
@@ -119,7 +119,7 @@ const listSort = computed(() => {
       :key="todo.code"
       :todo="todo"
       @edit="$emit('edit', $event)"
-      @delete="$emit('delete', $event)"
+      @remove="$emit('remove', $event)"
       @check="$emit('check', $event)"
     ></todo-item>
   </ul>

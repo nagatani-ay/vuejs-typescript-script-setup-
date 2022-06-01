@@ -3,7 +3,7 @@ const props = defineProps<{ todos: Todo[] }>();
 const emit = defineEmits<{
   (e: 'create', data: Todo);
   (e: 'edit', data: Todo);
-  (e: 'delete', data: string);
+  (e: 'remove', data: string);
   (e: 'check', data: string);
 }>();
 </script>
@@ -16,6 +16,7 @@ const emit = defineEmits<{
         <ul>
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="todolist">TodoList</router-link></li>
+          <li><router-link to="schedule">Schedule</router-link></li>
         </ul>
       </div>
       <div class="main">
@@ -23,7 +24,7 @@ const emit = defineEmits<{
           :todos="todos"
           @create="$emit('create', $event)"
           @edit="$emit('edit', $event)"
-          @delete="$emit('delete', $event)"
+          @remove="$emit('remove', $event)"
           @check="$emit('check', $event)"
         ></router-view>
       </div>

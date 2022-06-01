@@ -14,33 +14,36 @@ import { Todo } from '../../types';
 const props = defineProps<{ todo: Todo }>();
 const emit = defineEmits<{
   (e: 'edit', data: Todo);
-  (e: 'delete', data: string);
+  (e: 'remove', data: string);
   (e: 'check', data: string);
 }>();
 
 const isOpen = ref(false);
-const tempText = ref('');
-const tempDeadline = ref('');
+const tempText = ref(props.todo.text);
+const tempDeadline = ref(toStringDeadline(props.todo.deadline));
 
 function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
 
 function editData() {
-  const newData = {
-    code: props.todo.code,
-    text: tempText.value,
-    status: props.todo.status,
-    time: getTime(),
-    deadline: toObjectDeadline(tempDeadline.value),
-  };
-  emit('edit', newData);
-  tempText.value = '';
-  tempDeadline.value = '';
-  toggleMenu();
+  if (tempText.value === '' || tempDeadline.value === '') {
+    alert('値を入力してください');
+  } else {
+    const newData = {
+      code: props.todo.code,
+      text: tempText.value,
+      status: props.todo.status,
+      time: getTime(),
+      deadline: toObjectDeadline(tempDeadline.value),
+    };
+    emit('edit', newData);
+    toggleMenu();
+  }
 }
-function deleteData() {
-  emit('delete', props.todo.code);
+
+function removeData() {
+  emit('remove', props.todo.code);
   toggleMenu();
 }
 </script>
@@ -50,8 +53,8 @@ function deleteData() {
     <custom-button @click="toggleMenu()">edit</custom-button>
     <!-- 編集メニュー -->
     <div class="editMenu" v-if="isOpen">
-      <custom-button @click="deleteData()">delete</custom-button>
-      <text-input v-model="tempText" :placeholder="todo.text"></text-input>
+      <custom-button @click="removeData()">remove</custom-button>
+      <text-input v-model="tempText"></text-input>
       <date-input v-model="tempDeadline"></date-input>
       <custom-button @click="editData()">完了</custom-button>
     </div>

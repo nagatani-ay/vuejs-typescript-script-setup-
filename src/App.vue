@@ -16,31 +16,20 @@ const testData = ref<Todo>({
   deadline: { year: 2022, month: 5, day: 0 },
 });
 
-const { add, remove } = useTodos();
+const { add, edit, checked, remove } = useTodos();
 function onCreate(data: Todo) {
-  // todos.value.push(data);
+  add(todos.value, data);
 }
 
 function onEdit(data: Todo) {
-  const codes = todos.value.map((x) => x.code);
-  const target = codes.indexOf(data.code);
-  todos.value.splice(target, 1, data);
+  edit(todos.value, data);
 }
 
-function onDelete(data: string) {
-  const codes = todos.value.map((x: Todo) => x.code);
-  const target = codes.indexOf(data);
-  todos.value.splice(target, 1);
+function onRemove(data: string) {
+  remove(todos.value, data);
 }
 function onCheck(data: string) {
-  const codes = todos.value.map((x: Todo) => x.code);
-  const target = codes.indexOf(data);
-  todos.value[target].status = !todos.value[target].status;
-  if (todos.value[target].status) {
-    todos.value[target].time = '完了:' + getTime();
-  } else {
-    todos.value[target].time = getTime();
-  }
+  checked(todos.value, data);
 }
 
 onMounted(() => {
@@ -62,12 +51,12 @@ watch(
 
 <template>
   <button @click="todos = []">clear</button>
-  <button @click="add(todos, testData)">addtest</button>
+
   <router-view
     :todos="todos"
-    @create="useTodos().add()"
+    @create="onCreate"
     @edit="onEdit"
-    @delete="onDelete"
+    @remove="onRemove"
     @check="onCheck"
   ></router-view>
 </template>
@@ -82,7 +71,8 @@ li {
   list-style: none;
 }
 
-ul {
+ul,
+p {
   margin: 0;
   padding: 0;
 }
