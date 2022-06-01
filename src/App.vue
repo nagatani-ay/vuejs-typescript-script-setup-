@@ -8,13 +8,13 @@ import { getTime } from './Function/utils';
 
 const todos = ref<Todo[]>([]);
 
-const testData =ref<Todo>({
-  code: "string",
-  text: "string",
+const testData = ref<Todo>({
+  code: 'string',
+  text: 'string',
   status: false,
-  time: "string",
-  deadline: { year: 2022; month: 5; day: 0 }
-})
+  time: 'string',
+  deadline: { year: 2022, month: 5, day: 0 },
+});
 
 const { add, remove } = useTodos();
 function onCreate(data: Todo) {
