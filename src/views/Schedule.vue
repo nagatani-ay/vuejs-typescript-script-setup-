@@ -14,18 +14,18 @@ const calendarArray = computed(() => {
   let calendarArray = [];
   const firstDayWeek = new Date(currentYear.value, currentMonth.value, 1);
   const lastDayWeek = new Date(currentYear.value, currentMonth.value, 0);
-  const lastMonthDay = new Date(currentYear.value,currentMonth.value - 1,0);
+  const lastMonthDay = new Date(currentYear.value, currentMonth.value - 1, 0);
 
   for (let i = 0; i < firstDayWeek.getDay(); i++) {
     calendarArray.push({
       date: {
-              year: lastMonthDay.getFullYear()
-              month: lastMonthDay.getMonth() + 1,
-              day: lastMonthDay.getDate() - i,
-            },
-    dayofweek: lastMonthDay.getDay()
-    })
-};
+        year: lastMonthDay.getFullYear(),
+        month: lastMonthDay.getMonth() + 1,
+        day: lastMonthDay.getDate() - i,
+      },
+      dayofweek: lastMonthDay.getDay(),
+    });
+  }
   console.log(lastMonthDay);
 });
 </script>
