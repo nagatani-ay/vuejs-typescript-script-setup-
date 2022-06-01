@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ modelValue: string; filter: string }>();
+const props = defineProps<{ modelValue: string; itemType: string }>();
 const emit = defineEmits<{ (e: 'update:modelValue', text: string): string }>();
 </script>
 
@@ -7,11 +7,11 @@ const emit = defineEmits<{ (e: 'update:modelValue', text: string): string }>();
   <label>
     <input
       type="radio"
-      :value="filter"
+      :value="itemType"
       name="group"
-      :checked="modelValue == filter"
+      :checked="modelValue == itemType"
       @input="$emit('update:modelValue', $event.target.value)"
-    />{{ filter }}
+    />{{ itemType }}
   </label>
 </template>
 

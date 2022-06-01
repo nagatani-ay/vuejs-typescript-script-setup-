@@ -11,7 +11,7 @@ const emit = defineEmits<{
 }>();
 
 const sortType = ref('Text');
-const sortOrder = ref('');
+const orderType = ref('');
 const filterType = ref('全');
 const changeFilter = (data) => {
   console.log(data);
@@ -33,7 +33,7 @@ const listFilter = computed(() => {
 const listSort = computed(() => {
   let sorted_list = [];
   let order = 1;
-  if (sortOrder.value == 'ascend') {
+  if (orderType.value == 'ascend') {
     order = -1;
   } else {
     order = 1;
@@ -107,6 +107,11 @@ const listSort = computed(() => {
     <todo-menu
       @create="$emit('create', $event)"
       @update:filter="filterType = $event"
+      @update:sort="
+        sortType = $event.selectSortType;
+        orderType = $event.selectOrder;
+      "
+      ;
     ></todo-menu>
   </div>
   <ul>
