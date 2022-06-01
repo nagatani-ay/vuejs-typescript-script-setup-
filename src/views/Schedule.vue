@@ -2,9 +2,10 @@
 import { ref, computed, onMounted } from 'vue';
 import ScheduleMenu from '../components/Schedule/ScheduleMenu.vue';
 import TodoCalendar from '../components/Schedule/Calendar.vue';
+import { Todo } from '../types';
 
 
-const props = defineProps<{}>();
+const props = defineProps<{todos:Todo[]}>();
 const emit = defineEmits<{}>();
 
 const currentYear=ref(new Date().getFullYear())
