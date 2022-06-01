@@ -18,8 +18,8 @@ const changeFilter = (data) => {
 };
 
 const setSort = (data) => {
-  sortType = data.selectSortType;
-  orderType = data.selectOrder;
+  // sortType = data.selectSortType;
+  // orderType = data.selectOrder;
 };
 
 const listFilter = computed(() => {
@@ -112,7 +112,7 @@ const listSort = computed(() => {
     <todo-menu
       @create="$emit('create', $event)"
       @update:filter="filterType = $event"
-      @update:sort="setSort"
+      @update:sort="setSort()"
     ></todo-menu>
   </div>
   <ul>
