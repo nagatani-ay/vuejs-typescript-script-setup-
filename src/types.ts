@@ -11,3 +11,21 @@ export type DeadLine = {
   month: number;
   day: number;
 };
+
+export enum SortType {
+  Text,
+  Status,
+  Time,
+  Deadline,
+}
+
+export enum FilterType {
+  全,
+  済,
+  未,
+}
+
+export enum OrderType {
+  ascend,
+  decend,
+}

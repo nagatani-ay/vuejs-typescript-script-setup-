@@ -8,7 +8,7 @@ const emit = defineEmits<{ (e: 'update:modelValue', text: string): string }>();
     <input
       type="radio"
       :value="itemType"
-      name="group"
+      :name="itemType"
       :checked="modelValue == itemType"
       @input="$emit('update:modelValue', $event.target.value)"
     />{{ itemType }}

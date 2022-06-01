@@ -7,22 +7,22 @@ import { getTime } from './Function/utils';
 
 const todos = ref<Todo[]>([]);
 
-const onCreate = (data) => {
+function onCreate(data: Todo) {
   todos.value.push(data);
-};
+}
 
-const onEdit = (data) => {
+function onEdit(data: Todo) {
   const codes = todos.value.map((x) => x.code);
   const target = codes.indexOf(data.code);
   todos.value.splice(target, 1, data);
-};
+}
 
-const onDelete = (data) => {
+function onDelete(data: string) {
   const codes = todos.value.map((x: Todo) => x.code);
   const target = codes.indexOf(data);
   todos.value.splice(target, 1);
-};
-const onCheck = (data) => {
+}
+function onCheck(data: string) {
   const codes = todos.value.map((x: Todo) => x.code);
   const target = codes.indexOf(data);
   todos.value[target].status = !todos.value[target].status;
@@ -31,7 +31,7 @@ const onCheck = (data) => {
   } else {
     todos.value[target].time = getTime();
   }
-};
+}
 
 onMounted(() => {
   if (localStorage.getItem('todolist') != null) {
@@ -51,6 +51,7 @@ watch(
 </script>
 
 <template>
+  <button @click="todos = []">clear</button>
   <router-view
     :todos="todos"
     @create="onCreate"
@@ -73,5 +74,12 @@ li {
 ul {
   margin: 0;
   padding: 0;
+}
+</style>
+<style scoped>
+button {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 </style>

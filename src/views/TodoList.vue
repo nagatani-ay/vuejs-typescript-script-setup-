@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TodoItem from '../components/TodoList/TodoItem.vue';
 import TodoMenu from '../components/TodoList/TodoMenu.vue';
+import { Todo, SortType, FilterType, OrderType } from '/../types';
 import { ref, computed } from 'vue';
 const props = defineProps<{ todos: Todo[] }>();
 const emit = defineEmits<{
@@ -10,21 +11,19 @@ const emit = defineEmits<{
   (e: 'check', data: string);
 }>();
 
-const sortType = ref('Text');
-const orderType = ref('decend');
-const filterType = ref('全');
-const changeFilter = (data) => {
-  console.log(data);
-};
+const sortType = ref<SortType>('Text');
+const orderType = ref<OrderType>('decend');
+const filterType = ref<FilterType>('全');
 
-const setSort = (type, order) => {
+function setSort(type: string, order: string) {
   sortType.value = type;
   orderType.value = order;
-};
+}
+
 const listFilter = computed(() => {
   let filtered_list = [];
 
-  filtered_list = props.todos.map((x) => x);
+  filtered_list = props.todos.map((x: Todo) => x);
   if (filterType.value == '全') {
   } else if (filterType.value == '済') {
     filtered_list = filtered_list.filter((x) => x.status == true);

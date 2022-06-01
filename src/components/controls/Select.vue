@@ -2,13 +2,13 @@
 const props = defineProps<{
   optionList: string[];
   listType: string;
-  selectOption: string;
+  modelValue: string;
 }>();
 const emit = defineEmits<{}>();
 </script>
 
 <template>
-  <select v-model="selectOption">
+  <select v-model="modelValue">
     <optgroup :label="listType">
       <option v-for="option in optionList">{{ option }}</option>
     </optgroup>

@@ -22,11 +22,11 @@ const isOpen = ref(false);
 const tempText = ref('');
 const tempDeadline = ref('');
 
-const toggleMenu = () => {
+function toggleMenu() {
   isOpen.value = !isOpen.value;
-};
+}
 
-const editData = () => {
+function editData() {
   const newData = {
     code: props.todo.code,
     text: tempText.value,
@@ -38,11 +38,11 @@ const editData = () => {
   tempText.value = '';
   tempDeadline.value = '';
   toggleMenu();
-};
-const deleteData = () => {
+}
+function deleteData() {
   emit('delete', props.todo.code);
   toggleMenu();
-};
+}
 </script>
 
 <template>
