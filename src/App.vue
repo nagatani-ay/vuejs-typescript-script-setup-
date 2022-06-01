@@ -62,7 +62,7 @@ watch(
 
 <template>
   <button @click="todos = []">clear</button>
-  <button @click="add(todos)">addtest</button>
+  <button @click="add(todos, testData)">addtest</button>
   <router-view
     :todos="todos"
     @create="useTodos().add()"
