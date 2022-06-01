@@ -48,11 +48,9 @@ const emit = defineEmits<{
   background-color: #fab964;
 }
 .sidemenu {
-  background-color: #facf96;
   width: 10%;
 }
 .main {
-  background-color: #fae4c8;
   width: 100%;
   height: 100%;
 }
