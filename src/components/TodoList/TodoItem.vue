@@ -9,6 +9,7 @@ import {
   toObjectDeadline,
   getTime,
 } from '../../Function/utils';
+import { editData } from '../../Function/useItem';
 import { Todo } from '../../types';
 
 const props = defineProps<{ todo: Todo }>();
@@ -26,20 +27,9 @@ function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
 
-function editData() {
-  if (tempText.value === '' || tempDeadline.value === '') {
-    alert('値を入力してください');
-  } else {
-    const newData = {
-      code: props.todo.code,
-      text: tempText.value,
-      status: props.todo.status,
-      time: getTime(),
-      deadline: toObjectDeadline(tempDeadline.value),
-    };
-    emit('edit', newData);
-    toggleMenu();
-  }
+function onEdit() {
+  emit('edit', editData());
+  toggleMenu();
 }
 
 function removeData() {

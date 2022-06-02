@@ -5,10 +5,10 @@ export function useCalendar() {
   const { todos } = useTodos();
 
   const calendarItems = computed(() => {
-    const calendarItems = <Todo[]>{};
+    const calendarItems: any = {};
 
     todos.value.forEach((todo: Todo, i: number) => {
-      const key = Object.values(todo.deadline).join('-');
+      const key: string = Object.values(todo.deadline).join('-');
       if (!calendarItems[key]) {
         calendarItems[key] = [];
       }

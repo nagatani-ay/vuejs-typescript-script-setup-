@@ -7,7 +7,7 @@ import { useCalendar } from '../../Function/useCalendar';
 
 const props = defineProps<{ calendarArray: Calendar }>();
 const { todos } = useTodos();
-const {calendarItems}=useCalendar()
+const { calendarItems } = useCalendar();
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 function setClassName(data: string | number) {
   if (typeof data == 'string') {
@@ -17,8 +17,6 @@ function setClassName(data: string | number) {
     return `dayofweek--${data}`;
   }
 }
-
-
 </script>
 
 <template>
@@ -42,8 +40,16 @@ function setClassName(data: string | number) {
         v-for="calendar in calendarArray"
         :class="setClassName(calendar.dayofweek)"
       >
-        {{ calendar.date.day }}
-        <schedule-item v-for="item in calendarItems[calendar.date]"></schedule-item>
+        <p class="calendar__day">{{ calendar.date.day }}</p>
+        <!-- Todo -->
+        <div class="calendar__todos">
+          <schedule-item
+            v-for="calendarItem in calendarItems[
+              Object.values(calendar.date).join('-')
+            ]"
+            :calendarItem="calendarItem"
+          ></schedule-item>
+        </div>
       </div>
     </div>
   </div>
@@ -61,7 +67,7 @@ function setClassName(data: string | number) {
 }
 
 .calendar__table {
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: 100px;
   column-gap: 1px;
   row-gap: 1px;
 }
@@ -76,5 +82,15 @@ function setClassName(data: string | number) {
 }
 .dayofweek--6 {
   color: blue;
+}
+
+.calendar__day {
+  width: 100%;
+  height: 20%;
+}
+.calendar__todos {
+  width: 100%;
+  height: 80%;
+  overflow-y: scroll;
 }
 </style>
