@@ -65,7 +65,9 @@ function removeData() {
     ></check-box>
     <span>
       <span class="text">{{ todo.text }}</span>
-      <span class="time">{{ todo.time }}</span>
+      <span class="time"
+        ><span v-if="todo.status">完了:</span>{{ todo.time }}</span
+      >
     </span>
 
     <span class="deadline">{{ toStringDeadline(todo.deadline) }}</span>

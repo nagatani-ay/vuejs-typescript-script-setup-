@@ -22,11 +22,7 @@ export function useTodos() {
   function checked(list: Todo[], target: string) {
     const index = getIndex(list, target);
     list[index].status = !list[index].status;
-    if (list[index].status) {
-      list[index].time = '完了:' + getTime();
-    } else {
-      list[index].time = getTime();
-    }
+    list[index].time = getTime();
   }
 
   return { add, edit, checked, remove };
@@ -35,5 +31,6 @@ export function useTodos() {
 function getIndex(list: Todo[], target: string) {
   const codes = list.map((x: Todo) => x.code);
   const index = codes.indexOf(target);
+  // findIndex((element)
   return index;
 }
