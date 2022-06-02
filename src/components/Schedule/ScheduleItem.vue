@@ -5,7 +5,7 @@ const emit = defineEmits<{}>();
 
 <template>
   <div>
-    <div></div>
+    <div>a</div>
   </div>
 </template>
 

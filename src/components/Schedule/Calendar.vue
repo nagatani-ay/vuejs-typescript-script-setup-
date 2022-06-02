@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { Date, Calendar } from '../../types';
+import { Calendar, BaseDate } from '../../types';
 import { useSchedule } from '../../Function/useSchedule';
 import ScheduleItem from './ScheduleItem.vue';
-const props = defineProps<{ calendarArray: Calendar }>();
+import { useTodos } from '../../Function/useTodos';
+import { useCalendar } from '../../Function/useCalendar';
 
+const props = defineProps<{ calendarArray: Calendar }>();
+const { todos } = useTodos();
+const {calendarItems}=useCalendar()
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 function setClassName(data: string | number) {
   if (typeof data == 'string') {
@@ -13,6 +17,8 @@ function setClassName(data: string | number) {
     return `dayofweek--${data}`;
   }
 }
+
+
 </script>
 
 <template>
@@ -37,7 +43,7 @@ function setClassName(data: string | number) {
         :class="setClassName(calendar.dayofweek)"
       >
         {{ calendar.date.day }}
-        <schedule-item></schedule-item>
+        <schedule-item v-for="item in calendarItems[calendar.date]"></schedule-item>
       </div>
     </div>
   </div>

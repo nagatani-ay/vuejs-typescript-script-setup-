@@ -1,19 +1,21 @@
-export type Todo = {
-  code: string;
-  text: string;
-  status: boolean;
-  time: string;
-  deadline: { year: number; month: number; day: number };
-};
-
-export type DeadLine = {
+export type BaseDate = {
   year: number;
   month: number;
   day: number;
 };
 
+export type Todo = {
+  code: string;
+  text: string;
+  status: boolean;
+  time: string;
+  deadline: DeadLine;
+};
+
+export type DeadLine = BaseDate;
+
 export type Calendar = {
-  date: { year: number; month: number; day: number };
+  date: BaseDate;
   dayofweek: number;
 };
 
