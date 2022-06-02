@@ -28,7 +28,7 @@ export function toObjectDeadline(deadline: string) {
 
 export function toStringDeadline(deadline: DeadLine) {
   const str = Object.values(deadline)
-  .map((x) => x.toString().padStart(2, '0'))
-  .join('-');
+    .map((x) => x.toString().padStart(2, '0'))
+    .join('-');
   return str;
 }

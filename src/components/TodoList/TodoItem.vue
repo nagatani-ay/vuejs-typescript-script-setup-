@@ -28,7 +28,7 @@ function toggleMenu() {
 }
 
 function onEdit() {
-  emit('edit', editData());
+  emit('edit', editData(props.todo, tempText.value, tempDeadline.value));
   toggleMenu();
 }
 
@@ -46,7 +46,7 @@ function removeData() {
       <custom-button @click="removeData()">remove</custom-button>
       <text-input v-model="tempText"></text-input>
       <date-input v-model="tempDeadline"></date-input>
-      <custom-button @click="editData()">完了</custom-button>
+      <custom-button @click="onEdit()">完了</custom-button>
     </div>
     <!-- 表示アイテム -->
     <check-box
