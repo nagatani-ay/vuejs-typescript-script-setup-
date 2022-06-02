@@ -1,5 +1,5 @@
 import { Todo } from '../types';
-import { getTime } from './utils';
+import { getTime, toObjectDeadline } from './utils';
 import { ref, onMounted, watch } from 'vue';
 
 export function useTodos() {
@@ -30,6 +30,21 @@ export function useTodos() {
     return todos.value.findIndex((e) => e.code == target);
   }
 
+  function editData(todo: Todo, text: string, deadline: string) {
+    if (text === '' || deadline === '') {
+      alert('値を入力してください');
+    } else {
+      const newData = {
+        code: todo.code,
+        text: text,
+        status: todo.status,
+        time: getTime(),
+        deadline: toObjectDeadline(deadline),
+      };
+      return newData;
+    }
+  }
+
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
     if (localStorage.getItem('todolist') != null) {
@@ -47,5 +62,5 @@ export function useTodos() {
     { deep: true }
   );
 
-  return { todos, add, edit, checked, remove };
+  return { todos, add, edit, checked, remove, editData };
 }

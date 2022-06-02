@@ -5,13 +5,23 @@ import CustomButton from '../controls/Button.vue';
 import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
 import {toStringDeadline,toObjectDeadline} from '../../Function/utils';
+import {useItem} from "../../Function/useItem";
+
 const props = defineProps<{ calendarItem: Todo }>();
-const emit = defineEmits<{}>();
+const emit = defineEmits<{(e: 'edit', data: Todo);}>();
+
+
 const isOpen = ref(false);
 const tempText = ref(props.calendarItem.text);
 const tempDeadline = ref(toStringDeadline(props.calendarItem.deadline));
 function toggleMenu() {
   isOpen.value = !isOpen.value;
+}
+
+const { editData } = useItem();
+function onEdit() {
+  emit('edit', editData(props.calendarItem, tempText.value, tempDeadline.value));
+  toggleMenu();
 }
 </script>
 
@@ -24,7 +34,7 @@ function toggleMenu() {
     <custom-button @click="toggleMenu()">×</custom-button>
     <text-input v-model="tempText"></text-input>
     <date-input v-model="tempDeadline"></date-input>
-    <custom-button @click="editData()">完了</custom-button>
+    <custom-button @click="onEdit()">完了</custom-button>
     </div>
   </div>
 </template>

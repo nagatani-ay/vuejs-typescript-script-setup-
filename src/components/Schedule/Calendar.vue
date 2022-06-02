@@ -6,7 +6,7 @@ import { useTodos } from '../../Function/useTodos';
 import { useCalendar } from '../../Function/useCalendar';
 
 const props = defineProps<{ calendarArray: Calendar }>();
-const { todos } = useTodos();
+const { todo, edit } = useTodos();
 const { calendarItems } = useCalendar();
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 function setClassName(data: string | number) {
@@ -48,6 +48,7 @@ function setClassName(data: string | number) {
               Object.values(calendar.date).join('-')
             ]"
             :calendarItem="calendarItem"
+            @edit="edit(data)"
           ></schedule-item>
         </div>
       </div>
