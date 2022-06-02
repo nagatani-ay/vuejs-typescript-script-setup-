@@ -9,9 +9,10 @@ import {
   toObjectDeadline,
   getTime,
 } from '../../Function/utils';
-import { editData } from '../../Function/useItem';
+import { useItem } from '../../Function/useItem';
 import { Todo } from '../../types';
 
+const { editData } = useItem();
 const props = defineProps<{ todo: Todo }>();
 const emit = defineEmits<{
   (e: 'edit', data: Todo);
