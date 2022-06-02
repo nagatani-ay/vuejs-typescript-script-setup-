@@ -74,13 +74,4 @@ function removeData() {
   </li>
 </template>
 
-<style>
-.time {
-  font-size: 0.8em;
-  color: transparent;
-}
-
-.time:hover {
-  color: grey;
-}
-</style>
+<style></style>

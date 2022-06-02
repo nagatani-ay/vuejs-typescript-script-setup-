@@ -3,13 +3,25 @@ import TodoItem from '../components/TodoList/TodoItem.vue';
 import TodoMenu from '../components/TodoList/TodoMenu.vue';
 import { Todo, SortType, FilterType, OrderType } from '/../types';
 import { ref, computed } from 'vue';
-const props = defineProps<{ todos: Todo[] }>();
-const emit = defineEmits<{
-  (e: 'create', data: Todo);
-  (e: 'edit', data: Todo);
-  (e: 'remove', data: string);
-  (e: 'check', data: string);
-}>();
+import { useTodos } from '../Function/useTodos';
+const props = defineProps<{}>();
+const emit = defineEmits<{}>();
+
+const { todos, add, edit, checked, remove } = useTodos();
+function onCreate(data: Todo) {
+  add(data);
+}
+
+function onEdit(data: Todo) {
+  edit(data);
+}
+
+function onRemove(data: string) {
+  remove(data);
+}
+function onCheck(data: string) {
+  checked(data);
+}
 
 const sortType = ref<SortType>('Text');
 const orderType = ref<OrderType>('decend');
@@ -23,7 +35,7 @@ function setSort(type: string, order: string) {
 const listFilter = computed(() => {
   let filtered_list = [];
 
-  filtered_list = props.todos.map((x: Todo) => x);
+  filtered_list = todos.value.map((x: Todo) => x);
   if (filterType.value == '全') {
   } else if (filterType.value == '済') {
     filtered_list = filtered_list.filter((x) => x.status == true);
@@ -108,7 +120,7 @@ const listSort = computed(() => {
   <div>ToDo</div>
   <div class="menu">
     <todo-menu
-      @create="$emit('create', $event)"
+      @create="onCreate"
       @update:filter="filterType = $event"
       @update:sort="setSort"
     ></todo-menu>
@@ -118,9 +130,9 @@ const listSort = computed(() => {
       v-for="todo in listSort"
       :key="todo.code"
       :todo="todo"
-      @edit="$emit('edit', $event)"
-      @remove="$emit('remove', $event)"
-      @check="$emit('check', $event)"
+      @edit="onEdit"
+      @remove="onRemove"
+      @check="onCheck"
     ></todo-item>
   </ul>
 </template>

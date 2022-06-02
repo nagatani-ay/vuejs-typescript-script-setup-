@@ -11,7 +11,7 @@ const currentYear = ref(new Date().getFullYear());
 const currentMonth = ref(new Date().getMonth() + 1);
 
 const calendarArray = computed(() => {
-  let calendarArray = <Calendar>[];
+  const calendarArray = <Calendar>[];
   const firstDayWeek = new Date().getDay();
   const lastDayWeek = new Date(
     currentYear.value,

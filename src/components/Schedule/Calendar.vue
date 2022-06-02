@@ -11,10 +11,17 @@ const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
       {{ dayofweek }}
     </div>
   </div>
-
-  <div class="calendar__table">
-    <div v-for="calendar in calendarArray">
-      {{ calendar.date.day }}
+  <div class="calendar__body">
+    <div class="calendar__table">
+      <div
+        class="
+          calendar__item
+          border-solid border border-green-500 border-separate
+        "
+        v-for="calendar in calendarArray"
+      >
+        {{ calendar.date.day }}
+      </div>
     </div>
   </div>
 </template>
@@ -22,14 +29,21 @@ const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 <style>
 .calendar__header {
   display: grid;
-  align-items: start;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
   grid-auto-rows: minmax(50px, auto);
 }
+
 .calendar__table {
   display: grid;
-  align-items: start;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-auto-rows: minmax(150px, auto);
+  grid-auto-rows: minmax(100px, auto);
+  column-gap: 1px;
+  row-gap: 1px;
+}
+
+.calendar__item {
+  width: 100%;
+  height: 100%;
 }
 </style>
