@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import CustomButton from '../controls/Button.vue';
-import {useSchedule} from "../../Function/useSchedule"
-const { currentYear, currentMonth,prevCalendar,nextCalendar} = useSchedule();
+const props = defineProps<{ calendarArray: Calendar ;currentYear:number;currentMonth:number}>();
+const emit = defineEmits<{(e: 'prev'); (e: 'next');}>();
 </script>
 
 <template>
   <p class="currentYear">{{ currentYear }}</p>
   <div class="schedule__controls">
-    <custom-button @click="prevCalendar()">last</custom-button>
+    <custom-button @click="$emit('prev')">last</custom-button>
     <p class="currentMonth">{{ currentMonth }}月</p>
-    <custom-button @click="nextCalendar()">next</custom-button>
+    <custom-button @click="$emit('next')">next</custom-button>
   </div>
 </template>
 
