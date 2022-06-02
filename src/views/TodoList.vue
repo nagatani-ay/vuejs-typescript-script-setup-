@@ -4,8 +4,6 @@ import TodoMenu from '../components/TodoList/TodoMenu.vue';
 import { Todo, SortType, FilterType, OrderType } from '/../types';
 import { ref, computed } from 'vue';
 import { useTodos } from '../Function/useTodos';
-const props = defineProps<{}>();
-const emit = defineEmits<{}>();
 
 const { todos, add, edit, checked, remove } = useTodos();
 function onCreate(data: Todo) {

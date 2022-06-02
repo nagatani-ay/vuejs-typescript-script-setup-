@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { Date, Calendar } from '../../types';
-const props = defineProps<{ calendarArray: Calendar }>();
-const emit = defineEmits<{}>();
+import {useSchedule} from "../../Function/useSchedule"
+
+const { currentYear, currentMonth, calendarArray } = useSchedule();
+
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 </script>
 
 <template>
   <div class="calendar__header">
-    <div class="calendar__dayofweek" v-for="dayofweek in dayOfWeeksJP">
-      {{ dayofweek }}
+    <div class="calendar__dayofweek" v-for="dayOfWeek in dayOfWeeksJP">
+      {{ dayOfWeek }}
     </div>
   </div>
   <div class="calendar__body">

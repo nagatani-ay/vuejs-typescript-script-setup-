@@ -17,21 +17,8 @@ export type Calendar = {
   dayofweek: number;
 };
 
-export enum SortType {
-  Text,
-  Status,
-  Time,
-  Deadline,
-}
+export type SortType = 'Text' | 'Status' | 'Time' | 'Deadline';
 
-export enum FilterType {
-  全,
-  済,
-  未,
-}
+export type FilterType = '全' | '済' | '未';
 
-export enum OrderType {
-  ascend,
-  decend,
-}
-// union
+export type OrderType = 'ascend' | 'decend';

@@ -27,18 +27,16 @@ export function useTodos() {
 
   // index特定
   function getIndex(target: string) {
-    const codes = todos.value.map((x: Todo) => x.code);
-    const index = codes.indexOf(target);
-    // findIndex((element)
-    return index;
+    return todos.value.findIndex((e) => e.code == target);
   }
 
+  // Mount時ローカルストレージからデータをロード
   onMounted(() => {
     if (localStorage.getItem('todolist') != null) {
       todos.value = JSON.parse(localStorage.getItem('todolist') as string);
     }
   });
-
+  // 変更検知でローカルストレージにデータをセーブ
   watch(
     () => todos.value,
     (list, prevList) => {
