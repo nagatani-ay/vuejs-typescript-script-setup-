@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Calendar, BaseDate } from '../../types';
+import { Calendar, BaseDate,Todo } from '../../types';
 import { useSchedule } from '../../Function/useSchedule';
 import ScheduleItem from './ScheduleItem.vue';
 import { useCalendar } from '../../Function/useCalendar';
 
-const props = defineProps<{ calendarArray: Calendar }>();
+const props = defineProps<{ calendarArray: Calendar;todos:Todo[] }>();
 const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
 const { calendarItems } = useCalendar();
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];

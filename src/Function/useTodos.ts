@@ -10,8 +10,9 @@ export function useTodos() {
   }
   // 編集
   function edit(item: Todo) {
-    console.log(item);
+    console.log(todos.value);
     todos.value.splice(getIndex(item.code), 1, item);
+    console.log(todos.value);
   }
 
   // 削除
@@ -32,7 +33,6 @@ export function useTodos() {
   }
 
   function editData(item: Todo, text: string, deadline: string) {
-    
     if (text === '' || deadline === '') {
       alert('値を入力してください');
     } else {

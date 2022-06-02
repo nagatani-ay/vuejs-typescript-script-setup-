@@ -65,4 +65,8 @@ function removeData() {
   </li>
 </template>
 
-<style></style>
+<style>
+.time {
+  color: lightgrey;
+}
+</style>
