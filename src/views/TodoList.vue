@@ -5,7 +5,7 @@ import { Todo, SortType, FilterType, OrderType } from '/../types';
 import { ref, computed } from 'vue';
 import { useTodos } from '../Function/useTodos';
 
-const { todos, add, edit, checked, remove, } = useTodos();
+const { todos, add, edit, checked, remove } = useTodos();
 function onCreate(data: Todo) {
   add(data);
 }

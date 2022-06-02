@@ -10,6 +10,7 @@ export function useTodos() {
   }
   // 編集
   function edit(item: Todo) {
+    console.log(item);
     todos.value.splice(getIndex(item.code), 1, item);
   }
 
@@ -30,14 +31,15 @@ export function useTodos() {
     return todos.value.findIndex((e) => e.code == target);
   }
 
-  function editData(todo: Todo, text: string, deadline: string) {
+  function editData(item: Todo, text: string, deadline: string) {
+    
     if (text === '' || deadline === '') {
       alert('値を入力してください');
     } else {
       const newData = {
-        code: todo.code,
+        code: item.code,
         text: text,
-        status: todo.status,
+        status: item.status,
         time: getTime(),
         deadline: toObjectDeadline(deadline),
       };

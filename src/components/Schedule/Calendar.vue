@@ -2,13 +2,13 @@
 import { Calendar, BaseDate } from '../../types';
 import { useSchedule } from '../../Function/useSchedule';
 import ScheduleItem from './ScheduleItem.vue';
-import { useTodos } from '../../Function/useTodos';
 import { useCalendar } from '../../Function/useCalendar';
 
 const props = defineProps<{ calendarArray: Calendar }>();
-const { todo, edit } = useTodos();
+const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
 const { calendarItems } = useCalendar();
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
+
 function setClassName(data: string | number) {
   if (typeof data == 'string') {
     const index = dayOfWeeksJP.findIndex((e) => e == data);
@@ -17,6 +17,8 @@ function setClassName(data: string | number) {
     return `dayofweek--${data}`;
   }
 }
+
+
 </script>
 
 <template>
@@ -48,7 +50,7 @@ function setClassName(data: string | number) {
               Object.values(calendar.date).join('-')
             ]"
             :calendarItem="calendarItem"
-            @edit="edit(data)"
+            @edit="$emit('edit',$event)"
           ></schedule-item>
         </div>
       </div>

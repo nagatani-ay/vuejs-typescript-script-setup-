@@ -10,7 +10,7 @@ import {
   getTime,
 } from '../../Function/utils';
 import { Todo } from '../../types';
-import { useTodos } from '../Function/useTodos';
+import { useTodos } from '../../Function/useTodos';
 
 const { editData } = useTodos();
 const props = defineProps<{ todo: Todo }>();
