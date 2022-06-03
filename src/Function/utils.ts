@@ -27,8 +27,8 @@ export function toObjectDeadline(deadline: string) {
 }
 
 export function toStringDeadline(deadline: DeadLine) {
-  const str = Object.values(deadline) //順番が保証されない
-    .map((x) => x.toString().padStart(2, '0'))
-    .join('-');
-  return str;
+  const Year = deadline.year.toString();
+  const Month = deadline.month.toString().padStart(2, '0');
+  const Day = deadline.day.toString().padStart(2, '0');
+  return '${Year}-${Month}-${Day}';
 }
