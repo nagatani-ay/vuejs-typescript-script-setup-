@@ -25,6 +25,7 @@ function setClassName(data: string | number) {
     <div
       class="calendar__dayofweek"
       v-for="dayOfWeek in dayOfWeeksJP"
+      :key="dayOfWeek"
       :class="setClassName(dayOfWeek)"
     >
       {{ dayOfWeek }}
