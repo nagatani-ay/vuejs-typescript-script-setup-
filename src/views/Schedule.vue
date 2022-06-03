@@ -6,7 +6,6 @@ import { useTodos } from '../Function/useTodos';
 const { calendarArray, currentYear, currentMonth, prevCalendar, nextCalendar } =
   useSchedule();
 const { todos, edit } = useTodos();
-function onEdit(data: Todo) {}
 </script>
 
 <template>

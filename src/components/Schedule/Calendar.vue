@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { Calendar, BaseDate,Todo } from '../../types';
+import { Calendar, BaseDate, Todo } from '../../types';
 import { useSchedule } from '../../Function/useSchedule';
 import ScheduleItem from './ScheduleItem.vue';
 import { useCalendar } from '../../Function/useCalendar';
+import { toStringDeadline } from '../../Function/utils';
 
-const props = defineProps<{ calendarArray: Calendar;todos:Todo[] }>();
+const props = defineProps<{ calendarArray: Calendar; todos: Todo[] }>();
 const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
 const { calendarItems } = useCalendar();
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
@@ -17,8 +18,6 @@ function setClassName(data: string | number) {
     return `dayofweek--${data}`;
   }
 }
-
-
 </script>
 
 <template>
@@ -40,6 +39,7 @@ function setClassName(data: string | number) {
           border-solid border border-green-500 border-separate
         "
         v-for="calendar in calendarArray"
+        :key="calendar"
         :class="setClassName(calendar.dayofweek)"
       >
         <p class="calendar__day">{{ calendar.date.day }}</p>
@@ -47,10 +47,11 @@ function setClassName(data: string | number) {
         <div class="calendar__todos">
           <schedule-item
             v-for="calendarItem in calendarItems[
-              Object.values(calendar.date).join('-')
+              toStringDeadline(calendar.date)
             ]"
+            :key="calendarItem.code"
             :calendarItem="calendarItem"
-            @edit="$emit('edit',$event)"
+            @edit="$emit('edit', $event)"
           ></schedule-item>
         </div>
       </div>

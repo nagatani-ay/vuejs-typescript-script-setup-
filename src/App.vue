@@ -3,20 +3,12 @@ import Home from './views/Home.vue';
 import TodoList from './views/TodoList.vue';
 import { Todo } from './types';
 import { ref, onMounted, watch } from 'vue';
-
-import { getTime } from './Function/utils';
-
-
-
-
 </script>
 
 <template>
   <button @click="todos = []">clear</button>
 
-  <router-view
- 
-  ></router-view>
+  <router-view></router-view>
 </template>
 
 <style>

@@ -6,21 +6,6 @@ import { ref, computed } from 'vue';
 import { useTodos } from '../Function/useTodos';
 
 const { todos, add, edit, checked, remove } = useTodos();
-function onCreate(data: Todo) {
-  add(data);
-}
-
-function onEdit(data: Todo) {
-  edit(data);
-}
-
-function onRemove(data: string) {
-  remove(data);
-}
-function onCheck(data: string) {
-  checked(data);
-}
-
 const sortType = ref<SortType>('Text');
 const orderType = ref<OrderType>('decend');
 const filterType = ref<FilterType>('全');
@@ -118,7 +103,7 @@ const listSort = computed(() => {
   <div>ToDo</div>
   <div class="menu">
     <todo-menu
-      @create="onCreate"
+      @create="add"
       @update:filter="filterType = $event"
       @update:sort="setSort"
     ></todo-menu>
@@ -128,9 +113,9 @@ const listSort = computed(() => {
       v-for="todo in listSort"
       :key="todo.code"
       :todo="todo"
-      @edit="onEdit"
-      @remove="onRemove"
-      @check="onCheck"
+      @edit="edit"
+      @remove="remove"
+      @check="checked"
     ></todo-item>
   </ul>
 </template>

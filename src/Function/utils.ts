@@ -30,5 +30,5 @@ export function toStringDeadline(deadline: DeadLine) {
   const Year = deadline.year.toString();
   const Month = deadline.month.toString().padStart(2, '0');
   const Day = deadline.day.toString().padStart(2, '0');
-  return '${Year}-${Month}-${Day}';
+  return `${Year}-${Month}-${Day}`;
 }

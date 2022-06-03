@@ -1,13 +1,12 @@
 import { useTodos } from './useTodos';
 import { toStringDeadline } from './utils';
 import { Todo } from '../types';
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
 export function useCalendar() {
   const { todos } = useTodos();
 
   const calendarItems = computed(() => {
     const calendarItems: { [key: string]: Todo[] } = {};
-
     // 日付をキーとしたTodoオブジェクトのリストを生成
     todos.value.forEach((todo: Todo, i: number) => {
       const key: string = toStringDeadline(todo.deadline);
@@ -24,5 +23,6 @@ export function useCalendar() {
     });
     return calendarItems;
   });
+
   return { calendarItems };
 }
