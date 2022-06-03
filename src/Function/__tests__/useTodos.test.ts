@@ -114,6 +114,7 @@ test('useTodos'),
         },
       },
     ]);
+    // システム時間を設定
     vi.setSystemTime(new Date("2022-06-03 16:09:19"))
     checked('test3');
     expect(todos.value).toEqual([
@@ -129,4 +130,5 @@ test('useTodos'),
         },
       },
     ]);
+    vi.useRealTimers()
   };
