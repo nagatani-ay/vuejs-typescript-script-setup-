@@ -27,7 +27,7 @@ export function toObjectDeadline(deadline: string) {
 }
 
 export function toStringDeadline(deadline: DeadLine) {
-  const str = Object.values(deadline)
+  const str = Object.values(deadline) //順番が保証されない
     .map((x) => x.toString().padStart(2, '0'))
     .join('-');
   return str;

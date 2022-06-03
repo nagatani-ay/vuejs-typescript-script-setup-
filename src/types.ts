@@ -19,6 +19,12 @@ export type Calendar = {
   dayofweek: number;
 };
 
+export type CalendarItemArray = {
+  key:
+
+//template literal type
+};
+
 export type SortType = 'Text' | 'Status' | 'Time' | 'Deadline';
 
 export type FilterType = '全' | '済' | '未';

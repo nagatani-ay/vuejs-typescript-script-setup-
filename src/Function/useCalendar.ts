@@ -5,8 +5,9 @@ export function useCalendar() {
   const { todos } = useTodos();
 
   const calendarItems = computed(() => {
-    const calendarItems: any = {};
+    const calendarItems: {[key:string]:Todo[]} = {};
 
+    // 日付をキーとしたTodoオブジェクトのリストを生成
     todos.value.forEach((todo: Todo, i: number) => {
       const key: string = Object.values(todo.deadline).join('-');
       if (!calendarItems[key]) {
