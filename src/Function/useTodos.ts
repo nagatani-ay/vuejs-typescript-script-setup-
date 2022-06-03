@@ -1,6 +1,6 @@
 import { Todo } from '../types';
-import { getTime, toObjectDeadline } from './utils';
-import { ref, onMounted, watch } from 'vue';
+import { getTime, toObjectDeadline, toStringDeadline } from './utils';
+import { ref, onMounted, watch, computed } from 'vue';
 
 export function useTodos() {
   const todos = ref<Todo[]>([]);
@@ -45,6 +45,20 @@ export function useTodos() {
     }
   }
 
+  const calendarItems = () => {
+    const list: { [key: string]: Todo[] } = {};
+    const keys = new Set(todos.value.map((x) => toStringDeadline(x.deadline)));
+
+    for (let key of keys) {
+      list[key] = [];
+    }
+    todos.value.forEach((todo: Todo) => {
+      list[toStringDeadline(todo.deadline)].push(todo);
+    });
+
+    return list;
+  };
+
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
     if (localStorage.getItem('todolist') != null) {
@@ -62,5 +76,5 @@ export function useTodos() {
     { deep: true }
   );
 
-  return { todos, add, edit, checked, remove, editData };
+  return { todos, add, edit, checked, remove, calendarItems, editData };
 }

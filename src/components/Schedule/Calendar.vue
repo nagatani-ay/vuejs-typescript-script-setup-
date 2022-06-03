@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Calendar, BaseDate, Todo } from '../../types';
 import { useSchedule } from '../../Function/useSchedule';
+import { useTodos } from '../../Function/useTodos';
 import ScheduleItem from './ScheduleItem.vue';
-import { useCalendar } from '../../Function/useCalendar';
 import { toStringDeadline } from '../../Function/utils';
 
-const props = defineProps<{ calendarArray: Calendar; todos: Todo[] }>();
+const props = defineProps<{ calendarArray: Calendar; todos: Todo }>();
 const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
-const { calendarItems } = useCalendar();
+const { calendarItems } = useTodos();
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 
 function setClassName(data: string | number) {
@@ -47,7 +47,7 @@ function setClassName(data: string | number) {
         <!-- Todo -->
         <div class="calendar__todos">
           <schedule-item
-            v-for="calendarItem in calendarItems[
+            v-for="calendarItem in calendarItems()[
               toStringDeadline(calendar.date)
             ]"
             :key="calendarItem.code"
