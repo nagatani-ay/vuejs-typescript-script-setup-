@@ -47,7 +47,7 @@ function setClassName(data: string | number) {
         <!-- Todo -->
         <div class="calendar__todos">
           <schedule-item
-            v-for="calendarItem in calendarItems()[
+            v-for="calendarItem in calendarItems[
               toStringDeadline(calendar.date)
             ]"
             :key="calendarItem.code"

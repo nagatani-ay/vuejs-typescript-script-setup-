@@ -19,10 +19,8 @@ function toggleMenu() {
 
 const { editData } = useTodos();
 function onEdit() {
-  emit(
-    'edit',
-    editData(props.calendarItem, tempText.value, tempDeadline.value)
-  );
+  const data = editData(props.calendarItem, tempText.value, tempDeadline.value);
+  emit('edit', data);
   toggleMenu();
 }
 </script>

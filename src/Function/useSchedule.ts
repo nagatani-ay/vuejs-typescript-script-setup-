@@ -1,10 +1,13 @@
 import { ref, computed, onMounted } from 'vue';
 import { Todo, Calendar } from '../types';
+import { useTodos } from './useTodos';
 export function useSchedule() {
+  const { todos } = useTodos();
   const currentYear = ref(new Date().getFullYear());
   const currentMonth = ref(new Date().getMonth() + 1);
 
   const calendarArray = computed(() => {
+    const todolist = todos.value;
     const calendarArray: Calendar[] = [];
     const year = currentYear.value;
     const month = currentMonth.value;

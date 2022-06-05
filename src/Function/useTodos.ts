@@ -45,7 +45,7 @@ export function useTodos() {
     }
   }
 
-  const calendarItems = () => {
+  const calendarItems = computed(() => {
     const list: { [key: string]: Todo[] } = {};
     const keys = new Set(todos.value.map((x) => toStringDeadline(x.deadline)));
 
@@ -57,7 +57,7 @@ export function useTodos() {
     });
 
     return list;
-  };
+  });
 
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
