@@ -3,14 +3,19 @@ import CustomButton from '../controls/Button.vue';
 import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
 import { generateID, getTime, toObjectDeadline } from '../../Function/utils';
+import { useSort } from '../../Function/useSort';
 import { ref } from 'vue';
 import { Todo, SortType, FilterType, OrderType } from '../../types';
 import RadioButton from '../controls/RadioButton.vue';
 import SortSelect from '../controls/Select.vue';
-
+const props = defineProps<{}>();
+const emit = defineEmits<{
+  (e: 'create', data: Todo);
+}>();
+const { filterType, setFilterType, setSortType, setSortOrder } = useSort();
 const filterTypes = ['全', '済', '未'];
-const orderList = ['ascend', 'decend'];
-const sortTypeList = ['Text', 'Status', 'Time', 'Deadline'];
+const orderTypes = ['ascend', 'decend'];
+const sortTypes = ['Text', 'Status', 'Time', 'Deadline'];
 
 const selectFilterType = ref<FilterType>('全');
 const selectSortType = ref<SortType>('Text');
@@ -19,12 +24,7 @@ const selectOrder = ref<OrderType>('decend');
 const newText = ref('');
 const newDeadline = ref('');
 const isOpen = ref(false);
-const props = defineProps<{}>();
-const emit = defineEmits<{
-  (e: 'create', data: Todo);
-  (e: 'update:filter', selectFilterType: string);
-  (e: 'update:sort', selectSortType: string, selectOrder: string);
-}>();
+
 function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
@@ -53,33 +53,39 @@ function createNewData() {
     </div>
     <!-- ソート -->
     <sort-select
-      :optionList="sortTypeList"
-      :selectOption="selectSortType"
-      listType="SortType"
+      class="menu"
+      :optionList="sortTypes"
       v-model="selectSortType"
+      listType="SortType"
     ></sort-select>
+    <custom-button class="menu" @click="setSortType(selectSortType)"
+      >実行
+    </custom-button>
     <radio-button
-      v-for="order in orderList"
+      class="menu"
+      v-for="order in orderTypes"
       :key="order"
       v-model="selectOrder"
       :itemType="order"
       group="Order"
+      @change="setSortOrder(selectOrder)"
     ></radio-button>
-    <custom-button @click="$emit('update:sort', selectSortType, selectOrder)">
-      実行
-    </custom-button>
+
     <!-- フィルター -->
     <radio-button
+      class="menu"
       v-for="filter in filterTypes"
       :key="filter"
       v-model="selectFilterType"
       :itemType="filter"
       group="FilterMenuButton"
+      @change="setFilterType(selectFilterType)"
     ></radio-button>
-    <custom-button @click="$emit('update:filter', selectFilterType)">
-      実行
-    </custom-button>
   </div>
 </template>
 
-<style></style>
+<style>
+.menu {
+  margin-right: 5px;
+}
+</style>

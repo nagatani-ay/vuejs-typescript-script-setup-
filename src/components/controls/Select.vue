@@ -3,14 +3,22 @@ const props = defineProps<{
   optionList: string[];
   listType: string;
   modelValue: string;
+  selectOption: string;
 }>();
-const emit = defineEmits<{}>();
+const emit = defineEmits<{
+  (e: 'update:modelValue', modelValue: string);
+}>();
 </script>
 
 <template>
-  <select v-model="modelValue">
+  <select
+    :value="modelValue"
+    @change="$emit('update:modelValue', $event.target.value)"
+  >
     <optgroup :label="listType">
-      <option v-for="option in optionList">{{ option }}</option>
+      <option v-for="option in optionList" :key="option" :value="option">
+        {{ option }}
+      </option>
     </optgroup>
   </select>
 </template>

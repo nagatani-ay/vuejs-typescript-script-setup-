@@ -1,9 +1,11 @@
 import { Todo } from '../types';
 import { getTime, toObjectDeadline, toStringDeadline } from './utils';
 import { ref, onMounted, watch, computed } from 'vue';
-
+const todos = ref<Todo[]>([]);
+export function getTodos() {
+  return todos;
+}
 export function useTodos() {
-  const todos = ref<Todo[]>([]);
   // 追加
   function add(item: Todo) {
     todos.value.push(item);
@@ -76,5 +78,14 @@ export function useTodos() {
     { deep: true }
   );
 
-  return { todos, add, edit, checked, remove, editData, calendarItems };
+  return {
+    getTodos,
+    todos,
+    add,
+    edit,
+    checked,
+    remove,
+    editData,
+    calendarItems,
+  };
 }

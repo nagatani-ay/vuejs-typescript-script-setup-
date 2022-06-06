@@ -7,109 +7,97 @@ import { useTodos } from '../Function/useTodos';
 import { useSort } from '../Function/useSort';
 
 const { todos, add, edit, checked, remove } = useTodos();
-const { sortList } = useSort();
-const sortType = ref<SortType>('Text');
-const orderType = ref<OrderType>('decend');
-const filterType = ref<FilterType>('全');
+const { setFilterType, setSortType, setSortOrder, sortedList } = useSort();
 
-function setSort(type: string, order: string) {
-  sortType.value = type;
-  orderType.value = order;
-}
+// const listFilter = computed(() => {
+//   let filtered_list = todos.value.map((x: Todo) => x);
+//   if (filterType.value == '全') return filtered_list;
 
-const listFilter = computed(() => {
-  let filtered_list = todos.value.map((x: Todo) => x);
-  if (filterType.value == '全') return filtered_list;
+//   if (filterType.value == '済') {
+//     filtered_list = filtered_list.filter((x) => x.status == true);
+//   } else if (filterType.value == '未') {
+//     filtered_list = filtered_list.filter((x) => x.status == false);
+//   }
+//   return filtered_list;
+// });
 
-  if (filterType.value == '済') {
-    filtered_list = filtered_list.filter((x) => x.status == true);
-  } else if (filterType.value == '未') {
-    filtered_list = filtered_list.filter((x) => x.status == false);
-  }
-  return filtered_list;
-});
+// const listSort = computed(() => {
+//   let sorted_list = [];
+//   let order = 1;
+//   if (orderType.value == 'decend') {
+//     order = -1;
+//   } else {
+//     order = 1;
+//   }
 
-const listSort = computed(() => {
-  let sorted_list = [];
-  let order = 1;
-  if (orderType.value == 'decend') {
-    order = -1;
-  } else {
-    order = 1;
-  }
+//   // テキスト順
+//   if (sortType.value == 'Text') {
+//     sorted_list = listFilter.value
+//       .map((x) => x)
+//       .sort((a, b) => {
+//         if (a.text === b.text) {
+//           return a.deadline < b.deadline ? -order : order;
+//         }
+//         return a.text < b.text ? -order : order;
+//       });
+//     // 完了順
+//   } else if (sortType.value == 'Status') {
+//     let truelist = listFilter.value
+//       .filter((x) => x.status == true)
+//       .sort((a, b) => {
+//         if (a.text === b.text) {
+//           return a.deadline < b.deadline ? -order : order;
+//         }
+//         return a.text < b.text ? -order : order;
+//       });
+//     let falselist = listFilter.value
+//       .filter((x) => x.status == false)
+//       .sort((a, b) => {
+//         if (a.text === b.text) {
+//           return a.deadline < b.deadline ? -order : order;
+//         }
+//         return a.text < b.text ? -order : order;
+//       });
 
-  // テキスト順
-  if (sortType.value == 'Text') {
-    sorted_list = listFilter.value
-      .map((x) => x)
-      .sort((a, b) => {
-        if (a.text === b.text) {
-          return a.deadline < b.deadline ? -order : order;
-        }
-        return a.text < b.text ? -order : order;
-      });
-    // 完了順
-  } else if (sortType.value == 'Status') {
-    let truelist = listFilter.value
-      .filter((x) => x.status == true)
-      .sort((a, b) => {
-        if (a.text === b.text) {
-          return a.deadline < b.deadline ? -order : order;
-        }
-        return a.text < b.text ? -order : order;
-      });
-    let falselist = listFilter.value
-      .filter((x) => x.status == false)
-      .sort((a, b) => {
-        if (a.text === b.text) {
-          return a.deadline < b.deadline ? -order : order;
-        }
-        return a.text < b.text ? -order : order;
-      });
+//     if (order == 1) {
+//       sorted_list = truelist.concat(falselist);
+//     } else {
+//       sorted_list = falselist.concat(truelist);
+//     }
 
-    if (order == 1) {
-      sorted_list = truelist.concat(falselist);
-    } else {
-      sorted_list = falselist.concat(truelist);
-    }
-
-    // 最終更新時間
-  } else if (sortType.value == 'Time') {
-    sorted_list = listFilter.value
-      .map((x) => x)
-      .sort((a, b) => {
-        if (a.time === b.time) {
-          return a.text < b.text ? -order : order;
-        }
-        return a.time < b.time ? -order : order;
-      });
-    // 締切順
-  } else if (sortType.value == 'Deadline') {
-    sorted_list = listFilter.value
-      .map((x) => x)
-      .sort((a, b) => {
-        if (a.deadline === b.deadline) {
-          return a.text < b.text ? -order : order;
-        }
-        return a.deadline < b.deadline ? -order : order;
-      });
-  }
-  return sorted_list;
-});
+//     // 最終更新時間
+//   } else if (sortType.value == 'Time') {
+//     sorted_list = listFilter.value
+//       .map((x) => x)
+//       .sort((a, b) => {
+//         if (a.time === b.time) {
+//           return a.text < b.text ? -order : order;
+//         }
+//         return a.time < b.time ? -order : order;
+//       });
+//     // 締切順
+//   } else if (sortType.value == 'Deadline') {
+//     sorted_list = listFilter.value
+//       .map((x) => x)
+//       .sort((a, b) => {
+//         if (a.deadline === b.deadline) {
+//           return a.text < b.text ? -order : order;
+//         }
+//         return a.deadline < b.deadline ? -order : order;
+//       });
+//   }
+//   return sorted_list;
+// });
 </script>
 
 <template>
   <div>ToDo</div>
   <div class="menu">
-    <todo-menu
-      @create="add"
-      @update:filter="filterType = $event"
-      @update:sort="setSort"
-    ></todo-menu>
+    <todo-menu @create="add"></todo-menu>
   </div>
   <ul>
     <todo-item
-      v-for="todo in listSort"
+      v-for="todo in sortedList"
       :key="todo.code"
       :todo="todo"
       @edit="edit"
@@ -117,7 +105,6 @@ const listSort = computed(() => {
       @check="checked"
     ></todo-item>
   </ul>
-  {{ sortList }}
 </template>
 
 <style></style>
