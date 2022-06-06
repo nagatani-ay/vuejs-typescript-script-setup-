@@ -4,8 +4,10 @@ import TodoMenu from '../components/TodoList/TodoMenu.vue';
 import { Todo, SortType, FilterType, OrderType } from '/../types';
 import { ref, computed } from 'vue';
 import { useTodos } from '../Function/useTodos';
+import { useSort } from '../Function/useSort';
 
 const { todos, add, edit, checked, remove } = useTodos();
+const { sortList } = useSort();
 const sortType = ref<SortType>('Text');
 const orderType = ref<OrderType>('decend');
 const filterType = ref<FilterType>('全');
@@ -16,11 +18,10 @@ function setSort(type: string, order: string) {
 }
 
 const listFilter = computed(() => {
-  let filtered_list = [];
+  let filtered_list = todos.value.map((x: Todo) => x);
+  if (filterType.value == '全') return filtered_list;
 
-  filtered_list = todos.value.map((x: Todo) => x);
-  if (filterType.value == '全') {
-  } else if (filterType.value == '済') {
+  if (filterType.value == '済') {
     filtered_list = filtered_list.filter((x) => x.status == true);
   } else if (filterType.value == '未') {
     filtered_list = filtered_list.filter((x) => x.status == false);
@@ -36,9 +37,7 @@ const listSort = computed(() => {
   } else {
     order = 1;
   }
-  if (sortType.value == '') {
-  } else {
-  }
+
   // テキスト順
   if (sortType.value == 'Text') {
     sorted_list = listFilter.value
@@ -118,6 +117,7 @@ const listSort = computed(() => {
       @check="checked"
     ></todo-item>
   </ul>
+  {{ sortList }}
 </template>
 
 <style></style>

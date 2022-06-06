@@ -1,10 +1,7 @@
 import { ref, computed, onMounted } from 'vue';
-import { toStringDeadline } from '../Function/utils';
-import { useTodos } from './useTodos';
 import { Todo, Calendar } from '../types';
 
 export function useSchedule() {
-  const { todos } = useTodos();
   const currentYear = ref(new Date().getFullYear());
   const currentMonth = ref(new Date().getMonth() + 1);
 
