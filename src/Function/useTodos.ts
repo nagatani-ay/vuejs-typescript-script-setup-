@@ -30,6 +30,20 @@ export function useTodos() {
     return todos.value.findIndex((e) => e.code == target);
   }
 
+  const calendarItems = computed(() => {
+    const list: { [key: string]: Todo[] } = {};
+    const keys = new Set(todos.value.map((x) => toStringDeadline(x.deadline)));
+
+    for (let key of keys) {
+      list[key] = [];
+    }
+    todos.value.forEach((todo: Todo) => {
+      list[toStringDeadline(todo.deadline)].push(todo);
+    });
+
+    return list;
+  });
+
   function editData(item: Todo, text: string, deadline: string) {
     if (text === '' || deadline === '') {
       alert('値を入力してください');
@@ -62,5 +76,5 @@ export function useTodos() {
     { deep: true }
   );
 
-  return { todos, add, edit, checked, remove, editData };
+  return { todos, add, edit, checked, remove, editData, calendarItems };
 }

@@ -11,7 +11,6 @@ const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
 
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
 
-
 function setClassName(data: string | number) {
   if (typeof data == 'string') {
     const index = dayOfWeeksJP.findIndex((e) => e == data);
