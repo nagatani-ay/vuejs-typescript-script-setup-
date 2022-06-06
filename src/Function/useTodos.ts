@@ -1,5 +1,10 @@
 import { Todo } from '../types';
-import { getTime, toObjectDeadline, toStringDeadline ,generateID} from './utils';
+import {
+  getTime,
+  toObjectDeadline,
+  toStringDeadline,
+  generateID,
+} from './utils';
 import { ref, onMounted, watch, computed } from 'vue';
 const todos = ref<Todo[]>([]);
 export function getTodos() {
@@ -67,7 +72,7 @@ export function useTodos() {
       status: false,
       time: getTime(),
       deadline: toObjectDeadline(deadline),
-    }
+    };
     return newData;
   }
 
@@ -97,6 +102,6 @@ export function useTodos() {
     remove,
     editData,
     calendarItems,
-    createNewData
+    createNewData,
   };
 }
