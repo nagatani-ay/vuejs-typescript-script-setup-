@@ -1,18 +1,21 @@
 <script setup lang="ts">
+// Components
 import CustomButton from '../controls/Button.vue';
 import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
-import { generateID, getTime, toObjectDeadline } from '../../Function/utils';
-import { useSort } from '../../Function/useSort';
-import { ref } from 'vue';
-import { Todo, SortType, FilterType, OrderType } from '../../types';
 import RadioButton from '../controls/RadioButton.vue';
 import SortSelect from '../controls/Select.vue';
-const props = defineProps<{}>();
-const emit = defineEmits<{
-  (e: 'create', data: Todo);
-}>();
+//Functions
+import { generateID, getTime, toObjectDeadline } from '../../Function/utils';
+import { useSort } from '../../Function/useSort';
+import { useTodos } from '../../Function/useTodos';
+import { ref } from 'vue';
+// Types
+import { Todo, SortType, FilterType, OrderType } from '../../types';
+
+const { add, createNewData } = useTodos();
 const { filterType, setFilter, setSort } = useSort();
+
 const filterTypes = ['全', '済', '未'];
 const orderTypes = ['ascend', 'decend'];
 const sortTypes = ['Text', 'Status', 'Time', 'Deadline'];
@@ -28,15 +31,8 @@ const isOpen = ref(false);
 function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
-function createNewData() {
-  const newData = {
-    code: generateID(),
-    text: newText.value,
-    status: false,
-    time: getTime(),
-    deadline: toObjectDeadline(newDeadline.value),
-  };
-  emit('create', newData);
+function onCreate() {
+  add(createNewData(newText.value, newDeadline.value));
   newText.value = '';
   newDeadline.value = '';
   toggleMenu();
@@ -45,11 +41,12 @@ function createNewData() {
 
 <template>
   <div>
+    <!-- 新規追加 -->
     <custom-button @click="toggleMenu()">New</custom-button>
     <div v-if="isOpen">
       <text-input v-model="newText"></text-input>
       <date-input v-model="newDeadline"></date-input>
-      <custom-button @click="createNewData()">create</custom-button>
+      <custom-button @click="onCreate()">create</custom-button>
     </div>
     <!-- ソート -->
     <sort-select

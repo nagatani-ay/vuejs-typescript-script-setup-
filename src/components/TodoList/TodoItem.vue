@@ -4,21 +4,12 @@ import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
 import CheckBox from '../controls/CheckBox.vue';
 import { ref } from 'vue';
-import {
-  toStringDeadline,
-  toObjectDeadline,
-  getTime,
-} from '../../Function/utils';
+import { toStringDeadline, getTime } from '../../Function/utils';
 import { Todo } from '../../types';
 import { useTodos } from '../../Function/useTodos';
 
-const { editData } = useTodos();
+const { edit, checked, remove, editData } = useTodos();
 const props = defineProps<{ todo: Todo }>();
-const emit = defineEmits<{
-  (e: 'edit', data: Todo);
-  (e: 'remove', data: string);
-  (e: 'check', data: string);
-}>();
 
 const isOpen = ref(false);
 const tempText = ref(props.todo.text);
@@ -29,12 +20,12 @@ function toggleMenu() {
 }
 
 function onEdit() {
-  emit('edit', editData(props.todo, tempText.value, tempDeadline.value));
+  edit(editData(props.todo, tempText.value, tempDeadline.value));
   toggleMenu();
 }
 
 function removeData() {
-  emit('remove', props.todo.code);
+  remove(props.todo.code);
   toggleMenu();
 }
 </script>
@@ -52,7 +43,7 @@ function removeData() {
     <!-- 表示アイテム -->
     <check-box
       :modelValue="todo.status"
-      @check="$emit('check', todo.code)"
+      @check="checked(todo.code)"
     ></check-box>
     <span>
       <span class="text">{{ todo.text }}</span>

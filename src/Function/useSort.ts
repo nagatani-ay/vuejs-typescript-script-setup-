@@ -87,7 +87,6 @@ export function useSort() {
       let deadline_a = toStringDeadline(a.deadline);
       let deadline_b = toStringDeadline(b.deadline);
       if (deadline_a === deadline_b) {
-        //aとbが同じなら
         return a.text < b.text ? order : -order;
       }
       return deadline_a < deadline_b ? order : -order;

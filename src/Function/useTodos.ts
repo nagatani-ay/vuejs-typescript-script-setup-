@@ -1,5 +1,5 @@
 import { Todo } from '../types';
-import { getTime, toObjectDeadline, toStringDeadline } from './utils';
+import { getTime, toObjectDeadline, toStringDeadline ,generateID} from './utils';
 import { ref, onMounted, watch, computed } from 'vue';
 const todos = ref<Todo[]>([]);
 export function getTodos() {
@@ -60,6 +60,16 @@ export function useTodos() {
       return newData;
     }
   }
+  function createNewData(text: string, deadline: string) {
+    const newData = {
+      code: generateID(),
+      text: text,
+      status: false,
+      time: getTime(),
+      deadline: toObjectDeadline(deadline),
+    }
+    return newData;
+  }
 
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
@@ -87,5 +97,6 @@ export function useTodos() {
     remove,
     editData,
     calendarItems,
+    createNewData
   };
 }

@@ -3,7 +3,6 @@ const props = defineProps<{
   optionList: string[];
   listType: string;
   modelValue: string;
-  selectOption: string;
 }>();
 const emit = defineEmits<{
   (e: 'update:modelValue', modelValue: string);
