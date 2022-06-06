@@ -45,20 +45,6 @@ export function useTodos() {
     }
   }
 
-  const calendarItems = computed(() => {
-    const list: { [key: string]: Todo[] } = {};
-    const keys = new Set(todos.value.map((x) => toStringDeadline(x.deadline)));
-
-    for (let key of keys) {
-      list[key] = [];
-    }
-    todos.value.forEach((todo: Todo) => {
-      list[toStringDeadline(todo.deadline)].push(todo);
-    });
-
-    return list;
-  });
-
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
     if (localStorage.getItem('todolist') != null) {
@@ -76,5 +62,5 @@ export function useTodos() {
     { deep: true }
   );
 
-  return { todos, add, edit, checked, remove, calendarItems, editData };
+  return { todos, add, edit, checked, remove, editData };
 }

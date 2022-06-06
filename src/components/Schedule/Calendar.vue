@@ -5,10 +5,12 @@ import { useTodos } from '../../Function/useTodos';
 import ScheduleItem from './ScheduleItem.vue';
 import { toStringDeadline } from '../../Function/utils';
 
-const props = defineProps<{ calendarArray: Calendar; todos: Todo }>();
+const props =
+  defineProps<{ calendarArray: Calendar; calendarItems: any; todos: Todo }>();
 const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
-const { calendarItems } = useTodos();
+
 const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
+
 
 function setClassName(data: string | number) {
   if (typeof data == 'string') {

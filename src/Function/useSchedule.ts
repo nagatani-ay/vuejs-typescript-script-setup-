@@ -1,62 +1,11 @@
 import { ref, computed, onMounted } from 'vue';
-import { Todo, Calendar } from '../types';
+
 import { useTodos } from './useTodos';
+
 export function useSchedule() {
   const { todos } = useTodos();
   const currentYear = ref(new Date().getFullYear());
   const currentMonth = ref(new Date().getMonth() + 1);
-
-  const calendarArray = computed(() => {
-    const todolist = todos.value;
-    const calendarArray: Calendar[] = [];
-    const year = currentYear.value;
-    const month = currentMonth.value;
-    const firstDayWeek = new Date().getDay();
-    const lastDayWeek = new Date(year, month, 0).getDate();
-    const lastMonthDay = new Date(year, month - 1, 0);
-    const nextMonthDay = new Date(year, month + 1);
-
-    for (let i = 0; i < firstDayWeek; i++) {
-      calendarArray.push({
-        date: {
-          year: lastMonthDay.getFullYear(),
-          month: lastMonthDay.getMonth() + 1,
-          day: lastMonthDay.getDate() - firstDayWeek + i + 1,
-        },
-        dayofweek: i,
-      });
-    }
-    for (let i = 0; i < lastDayWeek; i++) {
-      calendarArray.push({
-        date: {
-          year: currentYear.value,
-          month: currentMonth.value,
-          day: i + 1,
-        },
-        dayofweek: (i + firstDayWeek) % 7,
-      });
-    }
-
-    let count = calendarArray[calendarArray.length - 1].dayofweek;
-    let loop = 0;
-    while (count != 6) {
-      calendarArray.push({
-        date: {
-          year: nextMonthDay.getFullYear(),
-          month: nextMonthDay.getMonth(),
-          day: loop + 1,
-        },
-        dayofweek: count + 1,
-      });
-
-      count++;
-      loop++;
-      if (count > 7) {
-        break;
-      }
-    }
-    return calendarArray;
-  });
 
   function prevCalendar() {
     currentMonth.value--;
@@ -77,7 +26,6 @@ export function useSchedule() {
   return {
     currentYear,
     currentMonth,
-    calendarArray,
     prevCalendar,
     nextCalendar,
   };
