@@ -1,5 +1,6 @@
 import { Todo, SortType, FilterType, OrderType } from '../types';
 import { getTodos } from './useTodos';
+import { toStringDeadline } from './utils';
 import { ref, computed } from 'vue';
 
 const filterType = ref<FilterType>('全');
@@ -8,15 +9,11 @@ const sortOrder = ref(1);
 
 export function useSort() {
   const todolist = getTodos();
-  function setFilterType(type: FilterType) {
+  function setFilter(type: FilterType) {
     filterType.value = type;
   }
-  function setSortType(type: SortType) {
+  function setSort(type: SortType, order: OrderType) {
     sortType.value = type;
-    console.log(sortType);
-  }
-
-  function setSortOrder(order: OrderType) {
     if (order == 'ascend') {
       sortOrder.value = 1;
     } else {
@@ -44,6 +41,10 @@ export function useSort() {
       list = textSort(list, sortOrder.value);
     } else if (sortType.value === 'Status') {
       list = statusSort(list, sortOrder.value);
+    } else if (sortType.value === 'Time') {
+      list = timeSort(list, sortOrder.value);
+    } else if (sortType.value === 'Deadline') {
+      list = deadlineSort(list, sortOrder.value);
     }
 
     return list;
@@ -68,9 +69,31 @@ export function useSort() {
       }
       return a.status < b.status ? -order : order;
     });
-    console.log(newList);
     return newList;
   }
 
-  return { setFilterType, setSortType, setSortOrder, sortedList };
+  function timeSort(list: Todo[], order: number) {
+    const newList = list.sort((a: Todo, b: Todo) => {
+      if (a.time === b.time) {
+        //aとbが同じなら
+        return a.text < b.text ? order : -order;
+      }
+      return a.time < b.time ? order : -order;
+    });
+    return newList;
+  }
+  function deadlineSort(list: Todo[], order: number) {
+    const newList = list.sort((a: Todo, b: Todo) => {
+      let deadline_a = toStringDeadline(a.deadline);
+      let deadline_b = toStringDeadline(b.deadline);
+      if (deadline_a === deadline_b) {
+        //aとbが同じなら
+        return a.text < b.text ? order : -order;
+      }
+      return deadline_a < deadline_b ? order : -order;
+    });
+    return newList;
+  }
+
+  return { setFilter, setSort, sortedList };
 }

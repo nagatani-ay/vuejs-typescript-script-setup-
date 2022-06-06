@@ -12,7 +12,7 @@ const props = defineProps<{}>();
 const emit = defineEmits<{
   (e: 'create', data: Todo);
 }>();
-const { filterType, setFilterType, setSortType, setSortOrder } = useSort();
+const { filterType, setFilter, setSort } = useSort();
 const filterTypes = ['全', '済', '未'];
 const orderTypes = ['ascend', 'decend'];
 const sortTypes = ['Text', 'Status', 'Time', 'Deadline'];
@@ -58,7 +58,7 @@ function createNewData() {
       v-model="selectSortType"
       listType="SortType"
     ></sort-select>
-    <custom-button class="menu" @click="setSortType(selectSortType)"
+    <custom-button class="menu" @click="setSort(selectSortType, selectOrder)"
       >実行
     </custom-button>
     <radio-button
@@ -68,7 +68,6 @@ function createNewData() {
       v-model="selectOrder"
       :itemType="order"
       group="Order"
-      @change="setSortOrder(selectOrder)"
     ></radio-button>
 
     <!-- フィルター -->
@@ -79,7 +78,7 @@ function createNewData() {
       v-model="selectFilterType"
       :itemType="filter"
       group="FilterMenuButton"
-      @change="setFilterType(selectFilterType)"
+      @change="setFilter(selectFilterType)"
     ></radio-button>
   </div>
 </template>
