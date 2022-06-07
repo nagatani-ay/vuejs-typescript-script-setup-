@@ -24,3 +24,5 @@ export type SortType = 'Text' | 'Status' | 'Time' | 'Deadline';
 export type FilterType = '全' | '済' | '未';
 
 export type OrderType = 'ascend' | 'decend';
+
+export type SortOrder = 1 | -1;

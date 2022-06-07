@@ -1,11 +1,11 @@
-import { Todo, SortType, FilterType, OrderType } from '../types';
+import { Todo, SortType, FilterType, OrderType,SortOrder } from '../types';
 import { getTodos } from './useTodos';
 import { toStringDeadline } from './utils';
 import { ref, computed } from 'vue';
 
 const filterType = ref<FilterType>('全');
 const sortType = ref<SortType>('Text');
-const sortOrder = ref<number>(1);//1か-1限定の型に
+const sortOrder = ref<SortOrder>(1);
 
 export function useSort() {
   const todolist = getTodos();
