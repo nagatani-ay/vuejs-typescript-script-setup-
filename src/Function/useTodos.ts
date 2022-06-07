@@ -6,10 +6,18 @@ import {
   generateID,
 } from './utils';
 import { ref, onMounted, watch, computed } from 'vue';
+
 const todos = ref<Todo[]>([]);
+
 export function getTodos() {
   return todos;
 }
+
+// index特定
+function getIndex(target: string) {
+  return todos.value.findIndex((e) => e.code == target);
+}
+
 export function useTodos() {
   // 追加
   function add(item: Todo) {
@@ -19,22 +27,15 @@ export function useTodos() {
   function edit(item: Todo) {
     todos.value.splice(getIndex(item.code), 1, item);
   }
-
   // 削除
   function remove(target: string) {
     todos.value.splice(getIndex(target), 1);
   }
-
   // チェック
   function checked(target: string) {
     const index = getIndex(target);
     todos.value[index].status = !todos.value[index].status;
     todos.value[index].time = getTime();
-  }
-
-  // index特定
-  function getIndex(target: string) {
-    return todos.value.findIndex((e) => e.code == target);
   }
 
   const calendarItems = computed(() => {
@@ -50,18 +51,18 @@ export function useTodos() {
 
     return list;
   });
-
+  //編集データ
   function editData(item: Todo, text: string, deadline: string) {
-      const newData = {
-        code: item.code,
-        text: text,
-        status: item.status,
-        time: getTime(),
-        deadline: toObjectDeadline(deadline),
-      };
-      return newData;
-    
+    const newData = {
+      code: item.code,
+      text: text,
+      status: item.status,
+      time: getTime(),
+      deadline: toObjectDeadline(deadline),
+    };
+    return newData;
   }
+  // 新規データ
   function createNewData(text: string, deadline: string) {
     const newData = {
       code: generateID(),
@@ -72,7 +73,6 @@ export function useTodos() {
     };
     return newData;
   }
-
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
     if (localStorage.getItem('todolist') != null) {
@@ -91,8 +91,6 @@ export function useTodos() {
   );
 
   return {
-    getTodos,
-    todos,
     add,
     edit,
     checked,
