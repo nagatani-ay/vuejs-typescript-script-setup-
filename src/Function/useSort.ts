@@ -1,13 +1,12 @@
-import { Todo, SortType, FilterType, OrderType,SortOrder } from '../types';
+import { Todo, SortType, FilterType, OrderType, SortOrder } from '../types';
 import { getTodos } from './useTodos';
 import { toStringDeadline } from './utils';
 import { ref, computed } from 'vue';
 
-const filterType = ref<FilterType>('全');
-const sortType = ref<SortType>('Text');
-const sortOrder = ref<SortOrder>(1);
-
 export function useSort() {
+  const filterType = ref<FilterType>('全');
+  const sortType = ref<SortType>('Text');
+  const sortOrder = ref<SortOrder>(1);
   const todolist = getTodos();
   function setFilter(type: FilterType) {
     filterType.value = type;
