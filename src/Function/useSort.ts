@@ -2,15 +2,12 @@ import { Todo, SortType, FilterType, OrderType, SortOrder } from '../types';
 import { getTodos } from './useTodos';
 import { toStringDeadline } from './utils';
 import { ref, computed } from 'vue';
-
+export const filterType = ref<FilterType>('全');
+export const sortType = ref<SortType>('Text');
+export const sortOrder = ref<SortOrder>(1);
 export function useSort() {
-  const filterType = ref<FilterType>('全');
-  const sortType = ref<SortType>('Text');
-  const sortOrder = ref<SortOrder>(1);
   const todolist = getTodos();
-  function setFilter(type: FilterType) {
-    filterType.value = type;
-  }
+
   function setSort(type: SortType, order: OrderType) {
     sortType.value = type;
     if (order == 'ascend') {
@@ -21,13 +18,14 @@ export function useSort() {
   }
 
   const filteredList = computed(() => {
+    const filter = filterType.value;
     let list = todolist.value.map((x: Todo) => x);
-    if (filterType.value == '全') {
+    if (filter == '全') {
       return list;
     }
-    if (filterType.value == '済') {
+    if (filter == '済') {
       list = list.filter((x) => x.status == true);
-    } else if (filterType.value == '未') {
+    } else if (filter == '未') {
       list = list.filter((x) => x.status == false);
     }
     return list;
@@ -92,5 +90,5 @@ export function useSort() {
     return newList;
   }
 
-  return { setFilter, setSort, sortedList, filterType, sortType, sortOrder };
+  return { setSort, sortedList };
 }

@@ -7,20 +7,19 @@ import RadioButton from '../controls/RadioButton.vue';
 import SortSelect from '../controls/Select.vue';
 //Functions
 import { generateID, getTime, toObjectDeadline } from '../../Function/utils';
-import { useSort } from '../../Function/useSort';
+import { useSort, filterType } from '../../Function/useSort';
 import { useTodos } from '../../Function/useTodos';
 import { ref } from 'vue';
 // Types
 import { Todo, SortType, FilterType, OrderType } from '../../types';
 
 const { add, createNewData } = useTodos();
-const { filterType, setFilter, setSort } = useSort();
+const { setSort } = useSort();
 
 const filterTypes = ['全', '済', '未'];
 const orderTypes = ['ascend', 'decend'];
 const sortTypes = ['Text', 'Status', 'Time', 'Deadline'];
 
-const selectFilterType = ref<FilterType>('全');
 const selectSortType = ref<SortType>('Text');
 const selectOrder = ref<OrderType>('decend');
 
@@ -77,10 +76,9 @@ function onCreate() {
       class="menu"
       v-for="filter in filterTypes"
       :key="filter"
-      v-model="selectFilterType"
+      v-model="filterType"
       :itemType="filter"
       group="FilterMenuButton"
-      @change="setFilter(selectFilterType)"
     ></radio-button>
   </div>
 </template>
