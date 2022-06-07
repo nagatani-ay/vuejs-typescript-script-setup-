@@ -42,7 +42,8 @@ export function useTodos() {
       time: getTime(),
       deadline: item.deadline,
     };
-    edit(result)
+
+    todos.value.splice(index, 1, result);
   }
 
   const calendarItems = computed(() => {
