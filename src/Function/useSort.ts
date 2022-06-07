@@ -92,5 +92,5 @@ export function useSort() {
     return newList;
   }
 
-  return { setFilter, setSort, sortedList };
+  return { setFilter, setSort, sortedList, filterType, sortType, sortOrder };
 }
