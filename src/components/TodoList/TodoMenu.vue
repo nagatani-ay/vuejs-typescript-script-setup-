@@ -44,26 +44,38 @@ function onCreate() {
 </script>
 
 <template>
-  <div>
+  <div class="flex">
     <!-- 新規追加 -->
-    <custom-button @click="toggleMenu()">New</custom-button>
-    <div v-if="isOpen">
-      <text-input v-model="newText"></text-input>
-      <date-input v-model="newDeadline"></date-input>
-      <custom-button @click="onCreate()">create</custom-button>
+    <div class="fixed bottom-0 right-0 m-10">
+      <custom-button
+        v-if="!isOpen"
+        class="p-5 rounded-full bg-white"
+        @click="toggleMenu()"
+        >New</custom-button
+      >
+      <div v-if="isOpen" class="flex content-center">
+        <custom-button class="p-1 bg-white" @click="toggleMenu()"
+          >cancel</custom-button
+        >
+        <text-input v-model="newText" class="border m-2"></text-input>
+        <date-input v-model="newDeadline" class="border m-2"></date-input>
+        <custom-button @click="onCreate()" class="border p-2"
+          >create</custom-button
+        >
+      </div>
     </div>
     <!-- ソート -->
     <sort-select
-      class="menu"
+      class="mr-2"
       :optionList="sortTypes"
       v-model="selectSortType"
       listType="SortType"
     ></sort-select>
-    <custom-button class="menu" @click="setSort(selectSortType, selectOrder)"
+    <custom-button class="mr-2" @click="setSort(selectSortType, selectOrder)"
       >実行
     </custom-button>
     <radio-button
-      class="menu"
+      class="mr-2 block"
       v-for="order in orderTypes"
       :key="order"
       v-model="selectOrder"
@@ -73,7 +85,7 @@ function onCreate() {
 
     <!-- フィルター -->
     <radio-button
-      class="menu"
+      class="mr-2"
       v-for="filter in filterTypes"
       :key="filter"
       v-model="filterType"
@@ -83,8 +95,4 @@ function onCreate() {
   </div>
 </template>
 
-<style>
-.menu {
-  margin-right: 5px;
-}
-</style>
+<style></style>
