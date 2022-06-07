@@ -54,7 +54,7 @@ function onCreate() {
         >New</custom-button
       >
       <div v-if="isOpen" class="flex content-center">
-        <custom-button class="p-1 bg-white" @click="toggleMenu()"
+        <custom-button class=" bg-white" @click="toggleMenu()"
           >cancel</custom-button
         >
         <text-input v-model="newText" class="border m-2"></text-input>
