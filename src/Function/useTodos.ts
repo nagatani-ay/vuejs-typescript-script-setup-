@@ -52,7 +52,6 @@ export function useTodos() {
   });
 
   function editData(item: Todo, text: string, deadline: string) {
- 
       const newData = {
         code: item.code,
         text: text,

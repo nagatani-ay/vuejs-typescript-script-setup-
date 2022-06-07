@@ -5,7 +5,7 @@ import { ref, computed } from 'vue';
 
 const filterType = ref<FilterType>('全');
 const sortType = ref<SortType>('Text');
-const sortOrder = ref<number>(1);//1か-1限定の方に
+const sortOrder = ref<number>(1);//1か-1限定の型に
 
 export function useSort() {
   const todolist = getTodos();

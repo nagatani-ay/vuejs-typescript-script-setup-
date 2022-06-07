@@ -32,6 +32,7 @@ function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
 function onCreate() {
+  //promiseを使える？
   if (newText.value === '' || newDeadline.value === '') {
     alert('値を入力してください');
   } else {
