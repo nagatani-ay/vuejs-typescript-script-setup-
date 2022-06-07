@@ -52,9 +52,7 @@ export function useTodos() {
   });
 
   function editData(item: Todo, text: string, deadline: string) {
-    if (text === '' || deadline === '') {
-      alert('値を入力してください');
-    } else {
+ 
       const newData = {
         code: item.code,
         text: text,
@@ -63,7 +61,7 @@ export function useTodos() {
         deadline: toObjectDeadline(deadline),
       };
       return newData;
-    }
+    
   }
   function createNewData(text: string, deadline: string) {
     const newData = {

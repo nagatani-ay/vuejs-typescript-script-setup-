@@ -23,7 +23,6 @@ const { currentYear, currentMonth, prevCalendar, nextCalendar, calendarArray } =
     :calendarArray="calendarArray"
     :calendarItems="calendarItems"
     :todos="todos"
-    @edit="edit"
   ></todo-calendar>
 </template>
 

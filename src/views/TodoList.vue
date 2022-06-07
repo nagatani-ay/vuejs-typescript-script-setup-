@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import TodoItem from '../components/TodoList/TodoItem.vue';
 import TodoMenu from '../components/TodoList/TodoMenu.vue';
-import { useTodos } from '../Function/useTodos';
 import { useSort } from '../Function/useSort';
 const { sortedList } = useSort();
-const { todos } = useTodos();
 </script>
 
 <template>

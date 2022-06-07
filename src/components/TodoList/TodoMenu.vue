@@ -32,10 +32,14 @@ function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
 function onCreate() {
-  add(createNewData(newText.value, newDeadline.value));
-  newText.value = '';
-  newDeadline.value = '';
-  toggleMenu();
+  if (newText.value === '' || newDeadline.value === '') {
+    alert('値を入力してください');
+  } else {
+    add(createNewData(newText.value, newDeadline.value));
+    newText.value = '';
+    newDeadline.value = '';
+    toggleMenu();
+  }
 }
 </script>
 

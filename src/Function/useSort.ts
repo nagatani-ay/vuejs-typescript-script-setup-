@@ -5,7 +5,7 @@ import { ref, computed } from 'vue';
 
 const filterType = ref<FilterType>('全');
 const sortType = ref<SortType>('Text');
-const sortOrder = ref(1);
+const sortOrder = ref<number>(1);//1か-1限定の方に
 
 export function useSort() {
   const todolist = getTodos();
@@ -26,7 +26,6 @@ export function useSort() {
     if (filterType.value == '全') {
       return list;
     }
-    console.log('not all');
     if (filterType.value == '済') {
       list = list.filter((x) => x.status == true);
     } else if (filterType.value == '未') {
@@ -46,7 +45,6 @@ export function useSort() {
     } else if (sortType.value === 'Deadline') {
       list = deadlineSort(list, sortOrder.value);
     }
-
     return list;
   });
 
@@ -82,6 +80,7 @@ export function useSort() {
     });
     return newList;
   }
+
   function deadlineSort(list: Todo[], order: number) {
     const newList = list.sort((a: Todo, b: Todo) => {
       let deadline_a = toStringDeadline(a.deadline);

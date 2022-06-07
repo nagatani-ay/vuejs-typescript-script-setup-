@@ -17,11 +17,14 @@ function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
 
-const { editData } = useTodos();
+const { edit, editData } = useTodos();
 function onEdit() {
-  const data = editData(props.calendarItem, tempText.value, tempDeadline.value);
-  emit('edit', data);
-  toggleMenu();
+  if (tempText.value === '' || tempDeadline.value === '') {
+    alert('値を入力してください');
+  } else {
+    edit(editData(props.calendarItem, tempText.value, tempDeadline.value));
+    toggleMenu();
+  }
 }
 </script>
 

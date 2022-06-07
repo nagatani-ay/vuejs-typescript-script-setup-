@@ -20,8 +20,12 @@ function toggleMenu() {
 }
 
 function onEdit() {
-  edit(editData(props.todo, tempText.value, tempDeadline.value));
-  toggleMenu();
+  if (tempText.value === '' || tempDeadline.value === '') {
+    alert('値を入力してください');
+  } else {
+    edit(editData(props.todo, tempText.value, tempDeadline.value));
+    toggleMenu();
+  }
 }
 
 function removeData() {
