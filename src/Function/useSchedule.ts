@@ -1,5 +1,5 @@
-import { ref, computed, onMounted } from 'vue';
-import { Todo, Calendar } from '../types';
+import { ref, computed } from 'vue';
+import { Calendar } from '../types';
 
 export function useSchedule() {
   const currentYear = ref(new Date().getFullYear());
