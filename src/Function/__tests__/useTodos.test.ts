@@ -1,9 +1,10 @@
+import {Todo} from "../../types"
 import { useTodos, getTodos } from '../useTodos';
 import { test, expect, vi, it, describe, beforeEach } from 'vitest';
 const { add, edit, checked, remove, editData, calendarItems, createNewData } =
   useTodos();
 const todolist = getTodos();
-const testData = {
+const testData:Todo = {
   code: 'testData1',
   text: 'test1',
   status: false,
@@ -25,7 +26,11 @@ const testData2 = {
     day: 22,
   },
 };
+function reset(){
+  
+}
 beforeEach(() => {
+  console.log("beforEach")
   todolist.value = [];
 });
 
@@ -122,7 +127,9 @@ describe('useTodos', () => {
     // システム時間を設定
     vi.setSystemTime(new Date('2022-06-03 16:09:19'));
     todolist.value.push(testData);
+    console.log(testData)
     checked('testData1');
+    console.log(testData)
     expect(todolist.value).toEqual([
       {
         code: 'testData1',
@@ -140,9 +147,10 @@ describe('useTodos', () => {
   });
 
   it('編集したデータを成型する', () => {
+    
     vi.setSystemTime(new Date('2022-06-03 16:09:19'));
     const result = editData(testData, 'editTest!', '2022-06-01');
-    expect(result).toMatchObject(
+    expect(result).toEqual(
       {
         code: 'testData1',
         text: 'editTest!',

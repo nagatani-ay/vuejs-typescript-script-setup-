@@ -34,8 +34,15 @@ export function useTodos() {
   // チェック
   function checked(target: string) {
     const index = getIndex(target);
-    todos.value[index].status = !todos.value[index].status;
-    todos.value[index].time = getTime();
+    const item = todos.value[index];
+    const result = {
+      code: item.code,
+      text: item.text,
+      status: !item.status,
+      time: getTime(),
+      deadline: item.deadline,
+    };
+    edit(result)
   }
 
   const calendarItems = computed(() => {
