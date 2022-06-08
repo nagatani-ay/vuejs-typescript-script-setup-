@@ -2,7 +2,7 @@ import Component from '../RadioButton.vue';
 import { mount } from '@vue/test-utils';
 import { describe, it } from 'vitest';
 
-describe('checkBox', () => {
+describe('RadioButton', () => {
   it('propsによる値の変更', async () => {
     const wrapper = mount(Component, {
       props: {
@@ -34,7 +34,6 @@ describe('checkBox', () => {
       },
     });
     wrapper.vm.$emit('update:modelValue');
-    const input = wrapper.find('input');
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
   });
 });

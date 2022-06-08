@@ -1,26 +1,26 @@
-import Component from '../DateInput.vue';
+import Component from '../TextInput.vue';
 import { mount } from '@vue/test-utils';
 import { describe, it } from 'vitest';
 
-describe('DateInput', () => {
+describe('TextInput', () => {
   it('propsによる値の変更', async () => {
     const wrapper = mount(Component, {
       props: {
-        modelValue: '2022-06-08',
+        modelValue: 'test',
       },
     });
     const input = wrapper.find('input');
-    expect(input.element.value).toBe('2022-06-08');
-    await wrapper.setProps({ modelValue: '2022-06-09' });
-    expect(input.element.value).toBe('2022-06-09');
+    expect(input.element.value).toBe('test');
+    await wrapper.setProps({ modelValue: 'test2' });
+    expect(input.element.value).toBe('test2');
   });
   it('イベントが発行されたか', async () => {
     const wrapper = mount(Component, {
       props: {
-        modelValue: '2022-06-08',
+        modelValue: 'test',
       },
     });
-    wrapper.vm.$emit('update:modelValue', '2022-12-02');
+    wrapper.vm.$emit('update:modelValue', 'test2');
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
   });
 });
