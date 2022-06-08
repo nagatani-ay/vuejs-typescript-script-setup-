@@ -1,27 +1,18 @@
 import Component from '../Button.vue';
-import { mount, shallowMount } from '@vue/test-utils';
-import { describe, it, test } from 'vitest';
+import { mount } from '@vue/test-utils';
+import { describe, it } from 'vitest';
 
-const Componenttest = {
-  template: '<div>Hello world</div>',
-};
-
-test('スロット', () => {
-  const wrapper = mount(Componenttest, {
-    //   slots: {
-    //     default: 'ButtonText',
-    //   },
+describe('button', () => {
+  it('フォールバックコンテンツ', () => {
+    const wrapper = mount(Component, {});
+    expect(wrapper.html()).toContain('Button');
   });
-  expect(wrapper.html()).toContain('Hello world');
+  it('スロットを渡す', () => {
+    const wrapper = mount(Component, {
+      slots: {
+        default: 'ButtonText',
+      },
+    });
+    expect(wrapper.html()).toContain('ButtonText');
+  });
 });
-
-// describe('button', () => {
-//   test('ボタン', () => {
-//     const wrapper = mount(Button, {
-//       slots: {
-//         default: 'ButtonText',
-//       },
-//     });
-//     expect(wrapper.html()).toContain('ButtonText');
-//   });
-// });
