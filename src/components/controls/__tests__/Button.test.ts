@@ -1,9 +1,9 @@
 import Button from '../Button.vue';
 import { mount, shallowMount } from '@vue/test-utils';
-import { describe, it } from 'vitest';
+import { describe, it, test } from 'vitest';
 
 describe('button', () => {
-  it('ボタン', () => {
+  test('ボタン', () => {
     const wrapper = mount(Button, {
       slots: {
         default: 'ButtonText',
