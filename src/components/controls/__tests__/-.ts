@@ -9,6 +9,6 @@ describe('button', () => {
         default: 'ButtonText',
       },
     });
-    expect(wrapper.html()).toContain('<button>ButtonText</button>');
+    expect(wrapper.html()).toContain('ButtonText');
   });
 });
