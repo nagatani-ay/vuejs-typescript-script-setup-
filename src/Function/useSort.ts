@@ -33,6 +33,7 @@ export function useSort() {
 
   const sortedList = computed(() => {
     let list = filteredList.value;
+  
     if (sortType.value == 'Text') {
       list = textSort(list, sortOrder.value);
     } else if (sortType.value === 'Status') {

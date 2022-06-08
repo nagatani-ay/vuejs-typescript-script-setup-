@@ -39,6 +39,7 @@ function setClassName(data: string | number) {
         class="
           calendar__item
           border-solid border border-green-500 border-separate
+          relative
         "
         v-for="calendar in calendarArray"
         :key="calendar"

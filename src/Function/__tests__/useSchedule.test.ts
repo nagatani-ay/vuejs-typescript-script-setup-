@@ -13,7 +13,7 @@ describe('useSchedule', () => {
     expect(calendarArray.value[0].dayofweek).toEqual(0);
     expect(
       calendarArray.value[calendarArray.value.length - 1].dayofweek
-    ).toEqual(6);
+    ).toEqual(6);//別の月もテストして合格すれば正しいとする
   });
   it('前月のカレンダーにする', () => {
     prevCalendar();
