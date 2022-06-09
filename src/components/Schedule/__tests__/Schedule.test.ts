@@ -6,10 +6,13 @@ import { describe, it } from 'vitest';
 import { useSchedule } from '../../../Function/useSchedule';
 const { dayOfWeeksJP } = useSchedule();
 
+// localstorageのモック
+
 describe('Calendar', () => {
-  it('カレンダー曜日', () => {
-    const wrapper = mount(Calendar);
-    console.log(wrapper.find('calendar__dayofweek').html());
+  it('カレンダー曜日', async () => {
+    // const spy = vi.spyOn(localStorage, 'getItem').mockImplementation(() => null);
+    // const wrapper = mount(Calendar, { shallow: true });
+    // console.log(wrapper);
   });
 });
 // describe('ScheduleItem', () => {});
