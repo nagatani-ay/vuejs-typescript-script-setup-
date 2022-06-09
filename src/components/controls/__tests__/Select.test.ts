@@ -13,7 +13,7 @@ const ParentComponent = {
 };
 
 describe('Select', () => {
-  it('propsによる値の変更', async () => {
+  it('オプションを生成', async () => {
     const Types = ['Text', 'Status', 'Time', 'Deadline'];
     const wrapper = mount(ParentComponent);
     const options = wrapper.findAll('option');
@@ -21,16 +21,13 @@ describe('Select', () => {
       expect(options[i].element.value).toContain(Types[i]);
     });
   });
+
   it('イベントが発行されたか', async () => {
-    const wrapper = mount(SelectMenu, {
-      props: {
-        optionList: ['Text', 'Status', 'Time', 'Deadline'],
-        label: 'SortType',
-        modelValue: 'Text',
-      },
-    });
-    wrapper.vm.$emit('update:modelValue');
+    const wrapper = mount(ParentComponent);
+
+    await wrapper.setValue('Test');
     expect(wrapper.emitted()).toHaveProperty('update:modelValue');
     expect(wrapper.emitted('update:modelValue')).toHaveLength(1);
+    expect(wrapper.emitted('update:modelValue')).toEqual([['Test']]);
   });
 });

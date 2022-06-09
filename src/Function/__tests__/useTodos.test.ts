@@ -39,11 +39,10 @@ const testData3: Todo = {
 };
 
 describe('useTodos', () => {
-  beforeEach(() => {
-    todolist.value = [];
-  });
+  beforeEach(() => {});
   afterEach(() => {
     vi.restoreAllMocks();
+    todolist.value = [];
   });
   it('空の配列に追加する', () => {
     // 追加テスト
