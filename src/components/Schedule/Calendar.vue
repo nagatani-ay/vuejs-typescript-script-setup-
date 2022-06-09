@@ -5,20 +5,11 @@ import { useTodos } from '../../Function/useTodos';
 import ScheduleItem from './ScheduleItem.vue';
 import { toStringDeadline } from '../../Function/utils';
 
-const props = defineProps<{}>();
-
 const { calendarItems } = useTodos();
-const { calendarArray } = useSchedule();
-const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
+const { calendarArray, setClassName,dayOfWeeksJP } = useSchedule();
 
-function setClassName(data: string | number) {
-  if (typeof data == 'string') {
-    const index = dayOfWeeksJP.findIndex((e) => e == data);
-    return `dayofweek--${index}`;
-  } else {
-    return `dayofweek--${data}`;
-  }
-}
+
+
 </script>
 
 <template>

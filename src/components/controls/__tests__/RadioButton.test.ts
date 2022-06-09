@@ -22,13 +22,12 @@ describe('RadioButton', () => {
   it('オプションを生成', async () => {
     const Types = ['全', '済', '未'];
     const wrapper = mount(ParentComponent);
-    console.log(wrapper.html());
     const options = wrapper.findAll('option');
     options.forEach((opt, i) => {
       expect(options[i].element.value).toContain(Types[i]);
     });
   });
-  it('値の変更', async () => {
+  it('クリックによる値の変更', async () => {
     const wrapper = mount(ParentComponent);
 
     const buttons = wrapper.findAll('input');
@@ -41,25 +40,4 @@ describe('RadioButton', () => {
     expect(buttons[1].element.checked).toEqual(false);
     expect(buttons[2].element.checked).toEqual(true);
   });
-  // it('クリックによる値の変更', async () => {
-  //   const wrapper = mount(RadioButton, {
-  //     props: {
-  //       modelValue: '済',
-  //       itemType: '全',
-  //     },
-  //   });
-  //   const input = wrapper.find('input');
-  //   await input.trigger('click');
-  //   expect(input.element.checked).toBe(true);
-  // });
-  // it('イベントが発行されたか', async () => {
-  //   const wrapper = mount(RadioButton, {
-  //     props: {
-  //       modelValue: '済',
-  //       itemType: '全',
-  //     },
-  //   });
-  //   wrapper.vm.$emit('update:modelValue');
-  //   expect(wrapper.emitted('update:modelValue')).toBeTruthy();
-  // });
 });

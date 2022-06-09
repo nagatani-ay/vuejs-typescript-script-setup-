@@ -4,7 +4,7 @@ import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
 import CheckBox from '../controls/CheckBox.vue';
 import { ref } from 'vue';
-import { toStringDeadline, getTime } from '../../Function/utils';
+import { toStringDeadline } from '../../Function/utils';
 import { Todo } from '../../types';
 import { useTodos } from '../../Function/useTodos';
 

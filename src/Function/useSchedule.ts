@@ -4,6 +4,7 @@ const currentYear = ref(new Date().getFullYear());
 const currentMonth = ref(new Date().getMonth() + 1);
 
 export function useSchedule() {
+  const dayOfWeeksJP = ['日', '月', '火', '水', '木', '金', '土'];
   const calendarArray = computed(() => {
     const calendarArray: Calendar[] = [];
     const year = currentYear.value;
@@ -69,6 +70,15 @@ export function useSchedule() {
     }
   }
 
+  function setClassName(data: string | number) {
+    if (typeof data == 'string') {
+      const index = dayOfWeeksJP.findIndex((e) => e == data);
+      return `dayofweek--${index}`;
+    } else {
+      return `dayofweek--${data}`;
+    }
+  }
+
   function nextCalendar() {
     currentMonth.value++;
     if (currentMonth.value == 13) {
@@ -83,5 +93,7 @@ export function useSchedule() {
     prevCalendar,
     nextCalendar,
     calendarArray,
+    setClassName,
+    dayOfWeeksJP,
   };
 }

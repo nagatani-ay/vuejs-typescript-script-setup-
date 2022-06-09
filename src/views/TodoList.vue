@@ -2,7 +2,9 @@
 import TodoItem from '../components/TodoList/TodoItem.vue';
 import TodoMenu from '../components/TodoList/TodoMenu.vue';
 import { useSort } from '../Function/useSort';
+import {useTodos} from '../Function/useTodos';
 const { sortedList } = useSort();
+const { getTodos } = useTodos();
 </script>
 
 <template>
