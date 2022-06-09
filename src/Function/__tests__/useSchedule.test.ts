@@ -1,9 +1,9 @@
 import { expect, vi, it, describe, beforeEach, afterEach } from 'vitest';
 import { useSchedule } from '../useSchedule';
-const { calendarArray, currentYear, currentMonth, prevCalendar, nextCalendar } =
+const { calendarArray,getYear,getMonth, prevCalendar, nextCalendar } =
   useSchedule();
-const selectYear = currentYear;
-const selectMonth = currentMonth;
+const selectYear = getYear();
+const selectMonth = getMonth();
 describe('useSchedule', () => {
   beforeEach(() => {
     selectYear.value = new Date().getFullYear();

@@ -56,10 +56,10 @@ export function useSchedule() {
     return calendarArray;
   });
   function getYear() {
-    return currentYear.value;
+    return currentYear;
   }
   function getMonth() {
-    return currentMonth.value;
+    return currentMonth;
   }
   function prevCalendar() {
     currentMonth.value--;
