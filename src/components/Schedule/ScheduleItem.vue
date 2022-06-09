@@ -7,12 +7,11 @@ import DateInput from '../controls/DateInput.vue';
 import { toStringDeadline, toObjectDeadline } from '../../Function/utils';
 import { useTodos } from '../../Function/useTodos';
 
-const props = defineProps<{ calendarItem: Todo }>();
-const emit = defineEmits<{ (e: 'edit', data: Todo) }>();
+const props = defineProps<{ calanderTodo: Todo }>();
 
 const isOpen = ref(false);
-const tempText = ref(props.calendarItem.text);
-const tempDeadline = ref(toStringDeadline(props.calendarItem.deadline));
+const tempText = ref(props.calanderTodo.text);
+const tempDeadline = ref(toStringDeadline(props.calanderTodo.deadline));
 function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
@@ -22,7 +21,7 @@ function onEdit() {
   if (tempText.value === '' || tempDeadline.value === '') {
     alert('値を入力してください');
   } else {
-    edit(editData(props.calendarItem, tempText.value, tempDeadline.value));
+    edit(editData(props.calanderTodo, tempText.value, tempDeadline.value));
     toggleMenu();
   }
 }
@@ -30,7 +29,7 @@ function onEdit() {
 
 <template>
   <div class="todo__item" @dblclick="toggleMenu()">
-    <p>{{ calendarItem.text }}</p>
+    <p>{{ calanderTodo.text }}</p>
 
     <div class="item__menu" v-if="isOpen">
       <custom-button @click="toggleMenu()">×</custom-button>

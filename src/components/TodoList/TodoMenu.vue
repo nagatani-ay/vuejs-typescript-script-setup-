@@ -45,7 +45,7 @@ function toggleMenu() {
       class="mr-2"
       :optionList="sortTypes"
       v-model="selectSortType"
-      listType="SortType"
+      label="SortType"
     ></sort-select>
     <custom-button class="mr-2" @click="setSort(selectSortType, selectOrder)"
       >実行

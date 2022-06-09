@@ -19,6 +19,9 @@ export type Calendar = {
   dayofweek: number;
 };
 
+export type CalendarItem = {
+  [key: string]: Todo[];
+};
 export type SortType = 'Text' | 'Status' | 'Time' | 'Deadline';
 
 export type FilterType = '全' | '済' | '未';

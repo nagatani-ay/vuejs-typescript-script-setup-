@@ -1,10 +1,9 @@
 import { ref, computed } from 'vue';
 import { Calendar } from '../types';
+const currentYear = ref(new Date().getFullYear());
+const currentMonth = ref(new Date().getMonth() + 1);
 
 export function useSchedule() {
-  const currentYear = ref(new Date().getFullYear());
-  const currentMonth = ref(new Date().getMonth() + 1);
-
   const calendarArray = computed(() => {
     const calendarArray: Calendar[] = [];
     const year = currentYear.value;
@@ -56,7 +55,12 @@ export function useSchedule() {
     }
     return calendarArray;
   });
-
+  function getYear() {
+    return currentYear.value;
+  }
+  function getMonth() {
+    return currentMonth.value;
+  }
   function prevCalendar() {
     currentMonth.value--;
     if (currentMonth.value == 0) {
@@ -74,8 +78,8 @@ export function useSchedule() {
   }
 
   return {
-    currentYear,
-    currentMonth,
+    getYear,
+    getMonth,
     prevCalendar,
     nextCalendar,
     calendarArray,

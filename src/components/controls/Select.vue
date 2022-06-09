@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   optionList: string[];
-  listType: string;
+  label: string;
   modelValue: string;
 }>();
 const emit = defineEmits<{
@@ -14,7 +14,7 @@ const emit = defineEmits<{
     :value="modelValue"
     @change="$emit('update:modelValue', $event.target.value)"
   >
-    <optgroup :label="listType">
+    <optgroup :label="label">
       <option v-for="option in optionList" :key="option" :value="option">
         {{ option }}
       </option>
