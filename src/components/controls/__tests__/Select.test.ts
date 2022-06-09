@@ -3,19 +3,19 @@ import { mount } from '@vue/test-utils';
 import { describe, it } from 'vitest';
 const ParentComponent = {
   components: { SelectMenu },
-  template: `<SelectMenu v-model="selectValue>`,
+  template: `<SelectMenu v-model="selectValue label="SortType">`,
   data() {
-    return { selectValue: '' };
+    return {
+      selectValue: '',
+      optionList: ['Text', 'Status', 'Time', 'Deadline'],
+    };
   },
 };
 
 describe('Select', () => {
   it('propsによる値の変更', async () => {
     const wrapper = mount(ParentComponent);
-    const select = wrapper.find('select');
-    expect(select.element.value).toBe('Text');
-    await wrapper.setProps({ modelValue: 'Status' });
-    expect(select.element.value).toBe('Status');
+    console.log(wrapper.html());
   });
   it('イベントが発行されたか', async () => {
     const wrapper = mount(SelectMenu, {
