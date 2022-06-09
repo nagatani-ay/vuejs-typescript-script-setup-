@@ -7,9 +7,6 @@ import { toStringDeadline } from '../../Function/utils';
 
 const { calendarItems } = useTodos();
 const { calendarArray, setClassName,dayOfWeeksJP } = useSchedule();
-
-
-
 </script>
 
 <template>
