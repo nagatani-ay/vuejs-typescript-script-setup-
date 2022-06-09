@@ -30,8 +30,11 @@ describe('checkBox', () => {
         modelValue: false,
       },
     });
-    wrapper.vm.$emit('check');
     const input = wrapper.find('input');
-    expect(wrapper.emitted().check).toBeTruthy();
+    await input.setValue(true);
+    await input.setValue(false);
+
+    expect(wrapper.emitted()).toHaveProperty('check');
+    expect(wrapper.emitted().check).toHaveLength(2);
   });
 });

@@ -20,7 +20,16 @@ describe('TextInput', () => {
         modelValue: 'test',
       },
     });
-    wrapper.vm.$emit('update:modelValue', 'test2');
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    const input = wrapper.find('input');
+    await input.setValue('test2');
+    await input.setValue('test3');
+
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(2);
+
+    expect(wrapper.emitted('update:modelValue')).toEqual([
+      ['test2'],
+      ['test3'],
+    ]);
   });
 });

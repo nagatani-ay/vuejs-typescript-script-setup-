@@ -1,6 +1,6 @@
 import { expect, vi, it, describe, beforeEach, afterEach } from 'vitest';
 import { useSchedule } from '../useSchedule';
-const { calendarArray,getYear,getMonth, prevCalendar, nextCalendar } =
+const { calendarArray, getYear, getMonth, prevCalendar, nextCalendar } =
   useSchedule();
 const selectYear = getYear();
 const selectMonth = getMonth();
@@ -13,7 +13,7 @@ describe('useSchedule', () => {
     expect(calendarArray.value[0].dayofweek).toEqual(0);
     expect(
       calendarArray.value[calendarArray.value.length - 1].dayofweek
-    ).toEqual(6);//別の月もテストして合格すれば正しいとする
+    ).toEqual(6); //別の月もテストして合格すれば正しいとする
   });
   it('前月のカレンダーにする', () => {
     prevCalendar();

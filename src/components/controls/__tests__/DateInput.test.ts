@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import { describe, it } from 'vitest';
 
 describe('DateInput', () => {
-  it('propsによる値の変更', async () => {
+  it('値の変更', async () => {
     const wrapper = mount(Component, {
       props: {
         modelValue: '2022-06-08',
@@ -11,7 +11,7 @@ describe('DateInput', () => {
     });
     const input = wrapper.find('input');
     expect(input.element.value).toBe('2022-06-08');
-    await wrapper.setProps({ modelValue: '2022-06-09' });
+    await input.setValue('2022-06-09');
     expect(input.element.value).toBe('2022-06-09');
   });
   it('イベントが発行されたか', async () => {
@@ -20,7 +20,9 @@ describe('DateInput', () => {
         modelValue: '2022-06-08',
       },
     });
-    wrapper.vm.$emit('update:modelValue', '2022-12-02');
-    expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    const input = wrapper.find('input');
+    await input.setValue('2022-12-02');
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    expect(wrapper.emitted('update:modelValue')).toEqual([['2022-12-02']]);
   });
 });
