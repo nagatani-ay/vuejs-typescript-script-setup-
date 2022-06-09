@@ -17,7 +17,6 @@ describe('Select', () => {
     const Types = ['Text', 'Status', 'Time', 'Deadline'];
     const wrapper = mount(ParentComponent);
     const options = wrapper.findAll('option');
-    console.log(options[0].element.value);
     options.forEach((opt, i) => {
       expect(options[i].element.value).toContain(Types[i]);
     });
