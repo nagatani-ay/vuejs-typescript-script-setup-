@@ -3,19 +3,24 @@ import { mount } from '@vue/test-utils';
 import { describe, it } from 'vitest';
 const ParentComponent = {
   components: { SelectMenu },
-  template: `<SelectMenu v-model="selectValue label="SortType">`,
+  template: `<select-menu v-model="selectValue" label="SortType"  :optionList="Types"></select-menu>`,
   data() {
     return {
       selectValue: '',
-      optionList: ['Text', 'Status', 'Time', 'Deadline'],
+      Types: ['Text', 'Status', 'Time', 'Deadline'],
     };
   },
 };
 
 describe('Select', () => {
   it('propsによる値の変更', async () => {
+    const Types = ['Text', 'Status', 'Time', 'Deadline'];
     const wrapper = mount(ParentComponent);
-    console.log(wrapper.html());
+    const options = wrapper.findAll('option');
+    console.log(options[0].element.value);
+    options.forEach((opt, i) => {
+      expect(options[i].element.value).toContain(Types[i]);
+    });
   });
   it('イベントが発行されたか', async () => {
     const wrapper = mount(SelectMenu, {
