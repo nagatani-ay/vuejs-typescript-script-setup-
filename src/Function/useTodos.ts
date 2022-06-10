@@ -83,9 +83,12 @@ export function useTodos() {
   }
   // Mount時ローカルストレージからデータをロード
   onMounted(() => {
-    if (localStorage.getItem('todolist') != null) {
+    try{
       todos.value = JSON.parse(localStorage.getItem('todolist') as string);
+    }catch(e){
+      todos.value=[];
     }
+ 
   });
   // 変更検知でローカルストレージにデータをセーブ
   watch(

@@ -3,14 +3,13 @@ import CustomButton from '../controls/Button.vue';
 import TextInput from '../controls/TextInput.vue';
 import DateInput from '../controls/DateInput.vue';
 import CheckBox from '../controls/CheckBox.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { toStringDeadline } from '../../Function/utils';
 import { Todo } from '../../types';
 import { useTodos } from '../../Function/useTodos';
 
 const { edit, checked, remove, editData } = useTodos();
 const props = defineProps<{ todo: Todo }>();
-
 const isOpen = ref(false);
 const tempText = ref(props.todo.text);
 const tempDeadline = ref(toStringDeadline(props.todo.deadline));
@@ -27,6 +26,14 @@ function onEdit() {
     toggleMenu();
   }
 }
+const localValue = computed({
+  get() {
+    return props.todo.status;
+  },
+  set() {
+    checked(props.todo.code);
+  },
+});
 
 function removeData() {
   remove(props.todo.code);
@@ -45,10 +52,7 @@ function removeData() {
       <custom-button @click="onEdit()">完了</custom-button>
     </div>
     <!-- 表示アイテム -->
-    <check-box
-      :modelValue="todo.status"
-      @check="checked(todo.code)"
-    ></check-box>
+    <check-box v-model="localValue"></check-box>
     <span>
       <span class="text">{{ todo.text }}</span>
       <span class="time"

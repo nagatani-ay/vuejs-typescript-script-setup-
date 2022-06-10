@@ -34,7 +34,7 @@ describe('checkBox', () => {
     await input.setValue(true);
     await input.setValue(false);
 
-    expect(wrapper.emitted()).toHaveProperty('check');
-    expect(wrapper.emitted().check).toHaveLength(2);
+    expect(wrapper.emitted()).toHaveProperty('update:modelValue');
+    expect(wrapper.emitted('update:modelValue')).toHaveLength(2);
   });
 });
