@@ -29,13 +29,13 @@ function onEdit() {
 
 <template>
   <div class="todo__item" @dblclick="toggleMenu()">
-    <p>{{ calanderTodo.text }}</p>
-    <div class="item__menu" v-if="isOpen">
-      <custom-button @click="toggleMenu()">×</custom-button>
-      <text-input v-model="tempText"></text-input>
-      <date-input v-model="tempDeadline"></date-input>
-      <custom-button @click="onEdit()">完了</custom-button>
-    </div>
+  <p>{{ calanderTodo.text }}</p>
+  <div class="item__menu" v-if="isOpen">
+  <custom-button @click="toggleMenu()">×</custom-button>
+  <text-input v-model="tempText"></text-input>
+  <date-input v-model="tempDeadline"></date-input>
+  <custom-button @click="onEdit()">完了</custom-button>
+  </div>
   </div>
 </template>
 
