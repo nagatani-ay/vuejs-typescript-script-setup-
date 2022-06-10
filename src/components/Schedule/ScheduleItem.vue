@@ -30,7 +30,6 @@ function onEdit() {
 <template>
   <div class="todo__item" @dblclick="toggleMenu()">
     <p>{{ calanderTodo.text }}</p>
-
     <div class="item__menu" v-if="isOpen">
       <custom-button @click="toggleMenu()">×</custom-button>
       <text-input v-model="tempText"></text-input>

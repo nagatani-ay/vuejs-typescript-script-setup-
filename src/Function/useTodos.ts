@@ -94,8 +94,10 @@ export function useTodos() {
   watch(
     () => todos.value,
     (list, prevList) => {
-      if (list != null) {
+      try{
         localStorage.setItem('todolist', JSON.stringify(list));
+      }catch(e){
+
       }
     },
     { deep: true }

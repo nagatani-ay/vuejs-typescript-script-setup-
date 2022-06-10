@@ -15,9 +15,9 @@ const { calendarArray, setClassName,dayOfWeeksJP } = useSchedule();
       class="calendar__dayofweek"
       v-for="dayOfWeek in dayOfWeeksJP"
       :key="dayOfWeek"
-      :class="setClassName(dayOfWeek)"
+      
     >
-      {{ dayOfWeek }}
+      <span :class="setClassName(dayOfWeek)">{{ dayOfWeek }}</span>
     </div>
   </div>
   <!-- カレンダー本体 -->
@@ -31,9 +31,8 @@ const { calendarArray, setClassName,dayOfWeeksJP } = useSchedule();
         "
         v-for="calendar in calendarArray"
         :key="calendar"
-        :class="setClassName(calendar.dayofweek)"
       >
-        <p class="calendar__day">{{ calendar.date.day }}</p>
+        <p class="calendar__day" :class="setClassName(calendar.dayofweek)">{{ calendar.date.day }}</p>
         <!-- Todo -->
         <div class="calendar__todos">
           <schedule-item

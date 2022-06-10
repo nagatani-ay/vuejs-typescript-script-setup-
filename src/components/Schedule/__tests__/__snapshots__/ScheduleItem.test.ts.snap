@@ -1,0 +1,10 @@
+// Vitest Snapshot v1
+exports[`ScheduleItem > ダブルクリックによるv-ifの表示切替 > <div class="todo__item">
+        <p>test1</p>
+        <!--v-if-->
+      </div> 1`] = `
+"<div class=\\"todo__item\\">
+  <p>test1</p>
+  <!--v-if-->
+</div>"
+`;
