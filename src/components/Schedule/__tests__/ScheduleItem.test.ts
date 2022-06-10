@@ -41,7 +41,13 @@ describe('ScheduleItem', () => {
   it('v-ifの表示切替', async () => {
     const wrapper = mount(ParentComponent);
     const array = wrapper.findAll('div');
-    expect(array[0].html()).toEqual('<div class="todo__item"><p>test1</p><!--v-if--></div>');
+    console.log(array[0].html());
+    expect(array[0].html()).toContain(
+      `<div class="todo__item">
+        <p>test1</p>
+        <!--v-if-->
+      </div>`
+    );
     await array[0].trigger('dblclick');
     // expect(array[0].html()).toContain('');
   });
