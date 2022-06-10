@@ -20,7 +20,7 @@ const ParentComponent = {
 
 describe('RadioButton', () => {
   it('オプションを生成', async () => {
-    const Types = ['全', '済', '未'];
+    const Types = ['全', '済', '未'];//引数から渡す
     const wrapper = mount(ParentComponent);
     const options = wrapper.findAll('option');
     options.forEach((opt, i) => {
@@ -41,3 +41,4 @@ describe('RadioButton', () => {
     expect(buttons[2].element.checked).toEqual(true);
   });
 });
+//vm selectvalueの確認

@@ -7,11 +7,19 @@ import { useSchedule } from '../../../Function/useSchedule';
 const { dayOfWeeksJP } = useSchedule();
 
 // localstorageのモック
+function localStorageMock() {
+  let store = {};
+  return {
+    getItem(key) {
+      return store[key] || null;
+    },
+  };
+}
 
 describe('Calendar', () => {
   it('カレンダー曜日', async () => {
     // const spy = vi.spyOn(localStorage, 'getItem').mockImplementation(() => null);
-    // const wrapper = mount(Calendar, { shallow: true });
+    const wrapper = mount(Calendar, { shallow: true });
     // console.log(wrapper);
   });
 });
