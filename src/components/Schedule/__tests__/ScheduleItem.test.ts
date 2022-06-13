@@ -40,15 +40,10 @@ const ParentComponent = {
 describe('ScheduleItem', () => {
   it('v-ifの表示切替', async () => {
     const wrapper = mount(ParentComponent);
-    const array = wrapper.findAll('div');
-    console.log(array[0].html());
-    expect(array[0].html()).toContain(
-      `<div class="todo__item">
-        <p>test1</p>
-        <!--v-if-->
-      </div>`
-    );
-    await array[0].trigger('dblclick');
-    // expect(array[0].html()).toContain('');
+    const div = wrapper.find('[class="todo__item"]');
+    expect(wrapper.find('[class="item__menu"]').exists()).toBe(false)
+    await div.trigger('dblclick');
+    expect(wrapper.find('[class="item__menu"]').exists()).toBeTruthy()
+
   });
 });
