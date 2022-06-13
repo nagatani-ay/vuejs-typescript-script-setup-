@@ -62,13 +62,6 @@ export function useSchedule() {
   function getMonth() {
     return currentMonth;
   }
-  function prevCalendar() {
-    currentMonth.value--;
-    if (currentMonth.value == 0) {
-      currentMonth.value = 12;
-      currentYear.value--;
-    }
-  }
 
   function setClassName(data: string | number) {
     if (typeof data == 'string') {
@@ -78,7 +71,13 @@ export function useSchedule() {
       return `dayofweek--${data}`;
     }
   }
-
+  function prevCalendar() {
+    currentMonth.value--;
+    if (currentMonth.value == 0) {
+      currentMonth.value = 12;
+      currentYear.value--;
+    }
+  }
   function nextCalendar() {
     currentMonth.value++;
     if (currentMonth.value == 13) {

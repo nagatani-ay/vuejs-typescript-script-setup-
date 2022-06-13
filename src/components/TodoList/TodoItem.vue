@@ -43,13 +43,15 @@ function removeData() {
 
 <template>
   <li>
-    <custom-button @click="toggleMenu()">edit</custom-button>
+    <custom-button class="toggle" @click="toggleMenu()">edit</custom-button>
     <!-- 編集メニュー -->
     <div class="editMenu" v-if="isOpen">
-      <custom-button @click="removeData()">remove</custom-button>
+      <custom-button class="remove_button" @click="removeData()"
+        >remove</custom-button
+      >
       <text-input v-model="tempText"></text-input>
       <date-input v-model="tempDeadline"></date-input>
-      <custom-button @click="onEdit()">完了</custom-button>
+      <custom-button class="edit_button" @click="onEdit()">完了</custom-button>
     </div>
     <!-- 表示アイテム -->
     <check-box v-model="localValue"></check-box>

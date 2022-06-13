@@ -27,7 +27,7 @@ function onCreate() {
     <custom-button @click="emit('toggle')">cancel</custom-button>
     <text-input v-model="newText"></text-input>
     <date-input v-model="newDeadline"></date-input>
-    <custom-button @click="onCreate()">create</custom-button>
+    <custom-button class="create_button" @click="onCreate()">create</custom-button>
   </div>
 </template>
 

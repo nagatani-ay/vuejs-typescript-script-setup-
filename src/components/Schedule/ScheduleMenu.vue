@@ -8,9 +8,9 @@ const { getYear, getMonth, prevCalendar, nextCalendar } = useSchedule();
 <template>
   <p class="currentYear">{{ getYear() }}</p>
   <div class="schedule__controls">
-    <custom-button @click="prevCalendar()">last</custom-button>
+    <custom-button class="prev" @click="prevCalendar()">last</custom-button>
     <p class="currentMonth">{{ getMonth() }}月</p>
-    <custom-button @click="nextCalendar()">next</custom-button>
+    <custom-button class="next" @click="nextCalendar()">next</custom-button>
   </div>
 </template>
 

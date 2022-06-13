@@ -19,7 +19,6 @@ describe('ScheduleItem', () => {
         },
       },
     });
-    const div = wrapper.find('.todo__item');
     expect(wrapper.find('.item__menu').exists()).toBe(false);
   });
 
@@ -39,8 +38,29 @@ describe('ScheduleItem', () => {
         },
       },
     });
-    const div = wrapper.find('.todo__item');
-    await div.trigger('dblclick');
+    await wrapper.find('.todo__item').trigger('dblclick');
     expect(wrapper.find('.item__menu').exists()).toBe(true);
+  });
+
+  it('編集の完了', async () => {
+    const wrapper = mount(ScheduleItem, {
+      props: {
+        calanderTodo: {
+          code: 'testData1',
+          text: 'test1',
+          status: false,
+          time: 'time',
+          deadline: {
+            year: 2022,
+            month: 5,
+            day: 22,
+          },
+        },
+      },
+    });
+    const spy = vi.spyOn(wrapper.vm, 'onEdit');
+    await wrapper.find('.todo__item').trigger('dblclick');
+    await wrapper.find('.confirm_button').trigger('click');
+    expect(spy).toHaveBeenCalled();
   });
 });

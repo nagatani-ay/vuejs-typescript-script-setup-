@@ -34,7 +34,7 @@ function onEdit() {
       <custom-button @click="toggleMenu()">×</custom-button>
       <text-input class="text_input" v-model="tempText"></text-input>
       <date-input class="date_input" v-model="tempDeadline"></date-input>
-      <custom-button class="confirm" @click="onEdit()">完了</custom-button>
+      <custom-button class="confirm_button" @click="onEdit()">完了</custom-button>
     </div>
   </div>
 </template>
