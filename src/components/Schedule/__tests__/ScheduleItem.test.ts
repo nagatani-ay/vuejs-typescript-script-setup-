@@ -43,31 +43,4 @@ describe('ScheduleItem', () => {
     await div.trigger('dblclick');
     expect(wrapper.find('.item__menu').exists()).toBe(true);
   });
-
-  it('編集の完了', async () => {
-    const confirmSpy = vi.mock('path', () => {
-      return {
-        default: { onEdit: vi.fn() },
-      };
-    });
-    const wrapper = mount(ScheduleItem, {
-      props: {
-        calanderTodo: {
-          code: 'testData1',
-          text: 'test1',
-          status: false,
-          time: 'time',
-          deadline: {
-            year: 2022,
-            month: 5,
-            day: 22,
-          },
-        },
-      },
-    });
-
-    await wrapper.find('[class="confirm"]').trigger('click');
-
-    expect(confirmSpy).toHaveBeenCalled();
-  });
 });
