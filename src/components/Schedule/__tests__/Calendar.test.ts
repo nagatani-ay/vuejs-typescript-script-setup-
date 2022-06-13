@@ -11,7 +11,7 @@ describe('Calendar', () => {
       expect(item.html()).toContain(`dayofweek--${count}`);
     });
   });
-  it('カレンダーの生成', async () => {
+  it('各日付にクラスをつける', async () => {
     const wrapper = mount(Calendar, { shallow: true });
     const array = wrapper.findAll('.calendar__day');
     array.forEach((item, count) => {

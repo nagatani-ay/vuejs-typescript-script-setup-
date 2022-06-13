@@ -38,12 +38,16 @@ const ParentComponent = {
 };
 
 describe('ScheduleItem', () => {
-  it('v-ifの表示切替', async () => {
+  it('v-ifが表示されていないことの確認', async () => {
     const wrapper = mount(ParentComponent);
     const div = wrapper.find('.todo__item');
     expect(wrapper.find('.item__menu').exists()).toBe(false)
+  });
+  
+  it('ダブルクリックでv-ifの表示がされる', async () => {
+    const wrapper = mount(ParentComponent);
+    const div = wrapper.find('.todo__item');
     await div.trigger('dblclick');
     expect(wrapper.find('.item__menu').exists()).toBe(true)
-
   });
 });
