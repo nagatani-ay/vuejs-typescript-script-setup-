@@ -6,16 +6,16 @@ import { describe, it } from 'vitest';
 describe('Calendar', () => {
   it('曜日ごとにクラス名をつける', async () => {
     const wrapper = mount(Calendar, { shallow: true });
-    const array = wrapper.findAll('[class="calendar__dayofweek"]');
+    const array = wrapper.findAll('.calendar__dayofweek');
     array.forEach((item, count) => {
-      expect(item.html()).toContain(`dayofweek--${count}`);
+      expect(item.classes(`dayofweek--${count}`)).toBe(true);
     });
   });
   it('各日付にクラスをつける', async () => {
     const wrapper = mount(Calendar, { shallow: true });
     const array = wrapper.findAll('.calendar__day');
     array.forEach((item, count) => {
-      expect(item.html()).toContain(`dayofweek--${count % 7}`);
+      expect(item.classes(`dayofweek--${count % 7}`)).toBe(true);
     });
   });
 });

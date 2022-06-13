@@ -6,18 +6,18 @@ import ScheduleItem from './ScheduleItem.vue';
 import { toStringDeadline } from '../../Function/utils';
 
 const { calendarItems } = useTodos();
-const { calendarArray, setClassName,dayOfWeeksJP } = useSchedule();
+const { calendarArray, setClassName, dayOfWeeksJP } = useSchedule();
 </script>
 
 <template>
   <div class="calendar__header">
     <div
       class="calendar__dayofweek"
+      :class="setClassName(dayOfWeek)"
       v-for="dayOfWeek in dayOfWeeksJP"
       :key="dayOfWeek"
-      
     >
-      <span :class="setClassName(dayOfWeek)">{{ dayOfWeek }}</span>
+      <span>{{ dayOfWeek }}</span>
     </div>
   </div>
   <!-- カレンダー本体 -->
@@ -32,7 +32,9 @@ const { calendarArray, setClassName,dayOfWeeksJP } = useSchedule();
         v-for="calendar in calendarArray"
         :key="calendar"
       >
-        <p class="calendar__day" :class="setClassName(calendar.dayofweek)">{{ calendar.date.day }}</p>
+        <p class="calendar__day" :class="setClassName(calendar.dayofweek)">
+          {{ calendar.date.day }}
+        </p>
         <!-- Todo -->
         <div class="calendar__todos">
           <schedule-item

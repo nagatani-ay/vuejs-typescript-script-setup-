@@ -88,7 +88,6 @@ export function useTodos() {
     }catch(e){
       todos.value=[];
     }
- 
   });
   // 変更検知でローカルストレージにデータをセーブ
   watch(
