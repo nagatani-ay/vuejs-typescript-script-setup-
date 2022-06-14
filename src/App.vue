@@ -6,8 +6,6 @@ import { ref, onMounted, watch } from 'vue';
 </script>
 
 <template>
-  <button @click="localStorage.removeItem('todolist')">clear</button>
-
   <router-view></router-view>
 </template>
 

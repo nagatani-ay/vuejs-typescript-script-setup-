@@ -12,7 +12,7 @@ vi.mock('../../../Function/useSchedule', () => {
   };
 });
 
-describe('ScheduleMenu', async () => {
+describe('ScheduleMenu', () => {
   it('カレンダーの年を取得', () => {
     const wrapper = mount(ScheduleMenu);
     expect(wrapper.find('.currentYear').text()).toBe('2022');

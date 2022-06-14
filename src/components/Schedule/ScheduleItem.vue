@@ -12,6 +12,7 @@ const props = defineProps<{ calanderTodo: Todo }>();
 const isOpen = ref(false);
 const tempText = ref(props.calanderTodo.text);
 const tempDeadline = ref(toStringDeadline(props.calanderTodo.deadline));
+
 function toggleMenu() {
   isOpen.value = !isOpen.value;
 }
@@ -34,7 +35,9 @@ function onEdit() {
       <custom-button @click="toggleMenu()">×</custom-button>
       <text-input class="text_input" v-model="tempText"></text-input>
       <date-input class="date_input" v-model="tempDeadline"></date-input>
-      <custom-button class="confirm_button" @click="onEdit()">完了</custom-button>
+      <custom-button class="confirm_button" @click="onEdit()"
+        >完了</custom-button
+      >
     </div>
   </div>
 </template>
