@@ -34,11 +34,11 @@ function toggleMenu() {
       <custom-button
         v-if="!isOpen"
         
-        class="p-5 rounded-full bg-white"
+        class="toggle p-5 rounded-full bg-white"
         @click="toggleMenu()"
         >New</custom-button
       >
-      <add-menu v-if="isOpen" @toggle="toggleMenu()"></add-menu>
+      <add-menu class="addmenu" v-if="isOpen" @toggle="toggleMenu()"></add-menu>
     </div>
     <!-- ソート -->
     <sort-select
